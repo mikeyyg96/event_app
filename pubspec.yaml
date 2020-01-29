@@ -44,8 +44,8 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/background/login_background1x.jpg
-    - assets/background/login_background2x.jpg
+    - assets/background/login_background.jpg
+    - assets/background/town_background.jpg
   # To add assets to your application, add an assets section, like this:
   # assets:
   #  - images/a_dot_burr.jpeg
@@ -62,6 +62,12 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: Geosans
+      fonts:
+        - asset: fonts/GeosansLight.ttf
+        - asset: fonts/GeosansLight-Oblique.ttf
+          style: italic
   # fonts:
   #   - family: Schyler
   #     fonts:

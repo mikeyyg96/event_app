@@ -1,6 +1,6 @@
+import 'package:event_app/ui/views/loginPages/frame_login_view.dart';
 import 'package:flutter/material.dart';
 
-import 'package:event_app/ui/views/loginPages/middle_login_view.dart';
 import 'locator.dart';
 
 void main() {
@@ -16,11 +16,11 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        primaryColor: Color(0xFFFF7500),
-        accentColor: Color(0xFF7f6b7e),
-        // Find a font that goes with theme of app
+        primaryColor: Color(0xFFAF9164),
+        accentColor: Color(0xFFF7F3E3),
+        fontFamily: 'Geosans'
       ),
-      home: MiddleLoginView(),
+      home: FrameLoginView(),
     );
   }
 }
