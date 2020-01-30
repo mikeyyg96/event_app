@@ -1,6 +1,7 @@
 import 'package:event_app/core/enums/viewstate.dart';
 import 'package:event_app/core/viewmodels/base_model.dart';
 import 'package:flutter/material.dart';
+import 'package:event_app/ui/shared/styling.dart';
 
 class FrameLoginModel extends BaseModel {
   // Temporary
@@ -16,9 +17,9 @@ class FrameLoginModel extends BaseModel {
               Icon(Icons.restaurant, color: Colors.black54,),
               Padding(
                 padding: const EdgeInsets.only(top: 16.0),
-                child: Text('Food', style: TextStyle(color: Colors.black54, fontSize: 22, fontWeight: FontWeight.bold),),
+                child: Text('Food', style: stylingActiveCard,),
               ),
-              Text('6x', style: TextStyle(color: Colors.black54, fontSize: 16.0),)
+              Text('6x', style: stylingActiveCardNum,)
             ],
           )
         ),
@@ -36,9 +37,9 @@ class FrameLoginModel extends BaseModel {
               Icon(Icons.restaurant, color: Colors.white,),
               Padding(
                 padding: const EdgeInsets.only(top: 16.0),
-                child: Text('Culture', style: TextStyle(color: Colors.white, fontSize: 22),),
+                child: Text('Culture', style: stylingInactiveCard,),
               ),
-              Text('6x', style: TextStyle(color: Colors.white, fontSize: 16.0),)
+              Text('6x', style: stylingInactiveCardNum,)
             ],
           )
         ),
@@ -56,9 +57,9 @@ class FrameLoginModel extends BaseModel {
               Icon(Icons.restaurant, color: Colors.white,),
               Padding(
                 padding: const EdgeInsets.only(top: 16.0),
-                child: Text('History', style: TextStyle(color: Colors.white, fontSize: 22),),
+                child: Text('History', style: stylingInactiveCard,),
               ),
-              Text('6x', style: TextStyle(color: Colors.white, fontSize: 16.0),)
+              Text('6x', style: stylingInactiveCardNum,)
             ],
           )
         ),
@@ -76,9 +77,9 @@ class FrameLoginModel extends BaseModel {
               Icon(Icons.restaurant, color: Colors.white,),
               Padding(
                 padding: const EdgeInsets.only(top: 16.0),
-                child: Text('Clubs', style: TextStyle(color: Colors.white, fontSize: 22),),
+                child: Text('Clubs', style: stylingInactiveCard,),
               ),
-              Text('6x', style: TextStyle(color: Colors.white, fontSize: 16.0),)
+              Text('6x', style: stylingInactiveCardNum,)
             ],
           )
         ),
@@ -96,9 +97,9 @@ class FrameLoginModel extends BaseModel {
               Icon(Icons.restaurant, color: Colors.white,),
               Padding(
                 padding: const EdgeInsets.only(top: 16.0),
-                child: Text('Outdoors', style: TextStyle(color: Colors.white, fontSize: 22),),
+                child: Text('Outdoors', style: stylingInactiveCard,),
               ),
-              Text('6x', style: TextStyle(color: Colors.white, fontSize: 16.0),)
+              Text('6x', style: stylingInactiveCardNum,)
             ],
           )
         ),
@@ -116,9 +117,9 @@ class FrameLoginModel extends BaseModel {
               Icon(Icons.restaurant, color: Colors.white,),
               Padding(
                 padding: const EdgeInsets.only(top: 16.0),
-                child: Text('Food', style: TextStyle(color: Colors.white, fontSize: 22),),
+                child: Text('Food', style: stylingInactiveCard,),
               ),
-              Text('6x', style: TextStyle(color: Colors.white, fontSize: 16.0),)
+              Text('6x', style: stylingInactiveCardNum,)
             ],
           )
         ),
