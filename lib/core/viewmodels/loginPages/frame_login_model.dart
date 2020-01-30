@@ -10,19 +10,27 @@ class FrameLoginModel extends BaseModel {
       width: 100,
       child: Card(
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Icon(Icons.restaurant, color: Colors.black54,),
-              Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: Text('Food', style: stylingActiveCard,),
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Icon(
+              Icons.restaurant,
+              color: Colors.black54,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: Text(
+                'Food',
+                style: stylingActiveCard,
               ),
-              Text('6x', style: stylingActiveCardNum,)
-            ],
-          )
-        ),
+            ),
+            Text(
+              '6x',
+              style: stylingActiveCardNum,
+            )
+          ],
+        )),
       ),
     ),
     Container(
@@ -30,19 +38,27 @@ class FrameLoginModel extends BaseModel {
       child: Card(
         color: Colors.black38,
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Icon(Icons.restaurant, color: Colors.white,),
-              Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: Text('Culture', style: stylingInactiveCard,),
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Icon(
+              Icons.restaurant,
+              color: Colors.white,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: Text(
+                'Culture',
+                style: stylingInactiveCard,
               ),
-              Text('6x', style: stylingInactiveCardNum,)
-            ],
-          )
-        ),
+            ),
+            Text(
+              '6x',
+              style: stylingInactiveCardNum,
+            )
+          ],
+        )),
       ),
     ),
     Container(
@@ -50,19 +66,27 @@ class FrameLoginModel extends BaseModel {
       child: Card(
         color: Colors.black38,
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Icon(Icons.restaurant, color: Colors.white,),
-              Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: Text('History', style: stylingInactiveCard,),
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Icon(
+              Icons.restaurant,
+              color: Colors.white,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: Text(
+                'History',
+                style: stylingInactiveCard,
               ),
-              Text('6x', style: stylingInactiveCardNum,)
-            ],
-          )
-        ),
+            ),
+            Text(
+              '6x',
+              style: stylingInactiveCardNum,
+            )
+          ],
+        )),
       ),
     ),
     Container(
@@ -70,19 +94,27 @@ class FrameLoginModel extends BaseModel {
       child: Card(
         color: Colors.black38,
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Icon(Icons.restaurant, color: Colors.white,),
-              Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: Text('Clubs', style: stylingInactiveCard,),
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Icon(
+              Icons.restaurant,
+              color: Colors.white,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: Text(
+                'Clubs',
+                style: stylingInactiveCard,
               ),
-              Text('6x', style: stylingInactiveCardNum,)
-            ],
-          )
-        ),
+            ),
+            Text(
+              '6x',
+              style: stylingInactiveCardNum,
+            )
+          ],
+        )),
       ),
     ),
     Container(
@@ -90,19 +122,27 @@ class FrameLoginModel extends BaseModel {
       child: Card(
         color: Colors.black38,
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Icon(Icons.restaurant, color: Colors.white,),
-              Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: Text('Outdoors', style: stylingInactiveCard,),
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Icon(
+              Icons.restaurant,
+              color: Colors.white,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: Text(
+                'Outdoors',
+                style: stylingInactiveCard,
               ),
-              Text('6x', style: stylingInactiveCardNum,)
-            ],
-          )
-        ),
+            ),
+            Text(
+              '6x',
+              style: stylingInactiveCardNum,
+            )
+          ],
+        )),
       ),
     ),
     Container(
@@ -110,19 +150,27 @@ class FrameLoginModel extends BaseModel {
       child: Card(
         color: Colors.black38,
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Icon(Icons.restaurant, color: Colors.white,),
-              Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: Text('Food', style: stylingInactiveCard,),
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Icon(
+              Icons.restaurant,
+              color: Colors.white,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: Text(
+                'Food',
+                style: stylingInactiveCard,
               ),
-              Text('6x', style: stylingInactiveCardNum,)
-            ],
-          )
-        ),
+            ),
+            Text(
+              '6x',
+              style: stylingInactiveCardNum,
+            )
+          ],
+        )),
       ),
     ),
   ];
@@ -138,6 +186,16 @@ class FrameLoginModel extends BaseModel {
     setState(ViewState.Busy);
 
     _pressed = true;
+    notifyListeners();
+
+    setState(ViewState.Idle);
+  }
+
+  void animateUp() {
+    setState(ViewState.Busy);
+
+    _pressed = false;
+    _isTransitioned = false;
     notifyListeners();
 
     setState(ViewState.Idle);

@@ -14,20 +14,19 @@ class FrameLoginView extends StatelessWidget {
         children: <Widget>[
           model.isTransitioned
               ? Container(
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 0.9, sigmaY: 0.9),
-                  child: Container(
-                    color: Colors.black.withOpacity(0.3),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 0.9, sigmaY: 0.9),
+                    child: Container(
+                      color: Colors.black.withOpacity(0.3),
                     ),
                   ),
-                
-                decoration: BoxDecoration(
+                  decoration: BoxDecoration(
                     image: DecorationImage(
                         image:
                             AssetImage('assets/background/town_background.jpg'),
                         fit: BoxFit.fill),
                   ),
-              )
+                )
               : Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
@@ -40,64 +39,60 @@ class FrameLoginView extends StatelessWidget {
               ? Material(
                   color: Colors.transparent,
                   child: Container(
-                    child: SingleChildScrollView(
-                      child: AnimationLimiter(
-                        child: Column(
-                          children: AnimationConfiguration.toStaggeredList(
-                            duration: const Duration(milliseconds: 1000),
-                            childAnimationBuilder: (widget) => SlideAnimation(
-                              horizontalOffset: 200.0,
-                              child: FadeInAnimation(
-                                child: widget,
-                              ),
+                    child: AnimationLimiter(
+                      child: Column(
+                        children: AnimationConfiguration.toStaggeredList(
+                          delay: Duration(milliseconds: 300),
+                          duration: const Duration(milliseconds: 1000),
+                          childAnimationBuilder: (widget) => SlideAnimation(
+                            horizontalOffset: 200.0,
+                            child: FadeInAnimation(
+                              child: widget,
                             ),
-                            children: <Widget>[
-                              Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.1,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 32.0, vertical: 64.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      IconButton(
-                                        onPressed: () => print('hello world'),
-                                        icon: Icon(Icons.search),
-                                        color: Colors.white.withOpacity(0.9),
-                                        iconSize: 32,
-                                      ),
-                                      IconButton(
-                                        onPressed: () => print('hello world'),
-                                        icon: Icon(Icons.settings),
-                                        color: Colors.white.withOpacity(0.9),
-                                        iconSize: 32,
-                                      ),
-                                    ],
-                                  ),
+                          ),
+                          children: <Widget>[
+                            Container(
+                              height: MediaQuery.of(context).size.height * 0.2,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 32.0, vertical: 64.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    IconButton(
+                                      onPressed: () => print('hello world'),
+                                      icon: Icon(Icons.search),
+                                      color: Colors.white.withOpacity(0.9),
+                                      iconSize: 32,
+                                    ),
+                                    IconButton(
+                                      onPressed: () => model.animateUp(),
+                                      icon: Icon(Icons.settings),
+                                      color: Colors.white.withOpacity(0.9),
+                                      iconSize: 32,
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Container(
+                            ),
+                            Container(
+                              height: MediaQuery.of(context).size.height * 0.5,
+                              padding: const EdgeInsets.all(64.0),
+                            ),
+                            Container(
                                 height:
-                                    MediaQuery.of(context).size.height * 0.6,
-                                padding: const EdgeInsets.all(64.0),
-                                
-                              ),
-                              Container(
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.3,
-                                  padding: const EdgeInsets.all(32.0),
-                                  child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: model.places.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return model.places[index];
-                                    },
-                                  ))
-                            ],
-                          ),
+                                    MediaQuery.of(context).size.height * 0.3,
+                                padding: const EdgeInsets.all(32.0),
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: model.places.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return model.places[index];
+                                  },
+                                ))
+                          ],
                         ),
                       ),
                     ),
@@ -109,7 +104,7 @@ class FrameLoginView extends StatelessWidget {
           AnimatedPositioned(
             curve: Curves.easeIn,
             duration: Duration(milliseconds: 500),
-            onEnd: () => model.transition(),
+            onEnd: () => model.pressed ? model.transition() : {},
             bottom:
                 model.pressed ? -100 : MediaQuery.of(context).size.height / 6,
             left: 125,
