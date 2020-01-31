@@ -7,3 +7,7 @@ final stylingInactiveCard = const TextStyle(color: Colors.white, fontSize: 22);
 final stylingActiveCardNum = const TextStyle(color: Colors.black54, fontSize: 16.0);
 
 final stylingInactiveCardNum = const TextStyle(color: Colors.white, fontSize: 16.0);
+
+final stylingHeader = const TextStyle(fontSize: 28.0, color: Colors.black, fontWeight: FontWeight.bold);
+
+final stylingInputText = const TextStyle(color: Colors.black, fontSize: 20.0);
