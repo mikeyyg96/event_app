@@ -1,5 +1,6 @@
 import 'package:event_app/core/enums/viewstate.dart';
 import 'package:event_app/core/viewmodels/base_model.dart';
+import 'package:event_app/ui/views/widget_views/content_card_view.dart';
 import 'package:flutter/material.dart';
 import 'package:event_app/ui/shared/styling.dart';
 
@@ -43,7 +44,7 @@ class FrameLoginModel extends BaseModel {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Icon(
-              Icons.restaurant,
+              Icons.public,
               color: Colors.white,
             ),
             Padding(
@@ -71,7 +72,7 @@ class FrameLoginModel extends BaseModel {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Icon(
-              Icons.restaurant,
+              Icons.schedule,
               color: Colors.white,
             ),
             Padding(
@@ -99,7 +100,7 @@ class FrameLoginModel extends BaseModel {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Icon(
-              Icons.restaurant,
+              Icons.local_bar,
               color: Colors.white,
             ),
             Padding(
@@ -175,9 +176,14 @@ class FrameLoginModel extends BaseModel {
     ),
   ];
 
+  ContentCardView _card = ContentCardView();
+  String _image = 'assets/background/town_background.jpg';
+
   bool _pressed = false;
   bool _isTransitioned = false;
 
+  ContentCardView get card => _card;
+  String get image => _image;
   bool get pressed => _pressed;
   bool get isTransitioned => _isTransitioned;
   List<Container> get places => _places;

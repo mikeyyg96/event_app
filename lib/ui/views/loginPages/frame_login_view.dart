@@ -17,22 +17,18 @@ class FrameLoginView extends StatelessWidget {
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 0.9, sigmaY: 0.9),
                     child: Container(
-                      color: Colors.black.withOpacity(0.3),
+                      color: Colors.black.withOpacity(0.5),
                     ),
                   ),
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        image:
-                            AssetImage('assets/background/town_background.jpg'),
-                        fit: BoxFit.fill),
+                        image: AssetImage(model.image), fit: BoxFit.fill),
                   ),
                 )
               : Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        image:
-                            AssetImage('assets/background/town_background.jpg'),
-                        fit: BoxFit.fill),
+                        image: AssetImage(model.image), fit: BoxFit.fill),
                   ),
                 ),
           model.isTransitioned
@@ -79,19 +75,19 @@ class FrameLoginView extends StatelessWidget {
                             Container(
                               height: MediaQuery.of(context).size.height * 0.5,
                               padding: const EdgeInsets.all(64.0),
+                              child: model.card,
                             ),
                             Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.3,
-                                padding: const EdgeInsets.all(32.0),
-                                child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: model.places.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return model.places[index];
-                                  },
-                                ))
+                              height: MediaQuery.of(context).size.height * 0.3,
+                              padding: const EdgeInsets.all(32.0),
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: model.places.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return model.places[index];
+                                },
+                              ),
+                            )
                           ],
                         ),
                       ),
