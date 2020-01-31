@@ -115,30 +115,72 @@ class SearchView extends StatelessWidget {
                   ],
                 ),
               ),
+              Container(
+                height: 275,
+                child: DefaultTabController(
+                  length: 3,
+                  child: Scaffold(
+                    backgroundColor: Theme.of(context).accentColor,
+                    appBar: TabBar(
+                      isScrollable: false,
+                      labelColor: Colors.black,
+                      labelStyle: TextStyle(fontWeight: FontWeight.bold),
+                      indicatorColor: Colors.black,
+                      indicatorSize: TabBarIndicatorSize.tab,
+                      indicatorPadding:
+                          EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
+                      tabs: <Widget>[
+                        Tab(text: 'NEAR'),
+                        Tab(text: 'POPULAR'),
+                        Tab(text: 'BEST PRICE'),
+                      ],
+                    ),
+                    body: TabBarView(
+                      children: <Widget>[
+                        Container(
+                          color: Colors.white,
+                          height: MediaQuery.of(context).size.height * 0.3,
+                          padding: const EdgeInsets.all(32.0),
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: model.places.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return model.places[index];
+                            },
+                          ),
+                        ),
+                        Container(
+                          color: Colors.white,
+                          height: MediaQuery.of(context).size.height * 0.3,
+                          padding: const EdgeInsets.all(32.0),
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: model.places.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return model.places[index];
+                            },
+                          ),
+                        ),
+                        Container(
+                          color: Colors.white,
+                          height: MediaQuery.of(context).size.height * 0.3,
+                          padding: const EdgeInsets.all(32.0),
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: model.places.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return model.places[index];
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
               Expanded(
                 child: Container(
                   color: Colors.white,
-                  child: Align(
-                    alignment: Alignment.topCenter,
-                    child: Container(
-                      color: Theme.of(context).accentColor,
-                      child: DefaultTabController(
-                        length: 3,
-                        child: TabBar(
-                          labelColor: Colors.black,
-                          labelStyle: TextStyle(fontWeight: FontWeight.bold),
-                          indicatorColor: Colors.black,
-                          indicatorSize: TabBarIndicatorSize.tab,
-                          indicatorPadding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
-                          tabs: <Widget>[
-                            Tab(text: 'NEAR'),
-                            Tab(text: 'POPULAR'),
-                            Tab(text: 'BEST PRICE'),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
                 ),
               ),
             ],
