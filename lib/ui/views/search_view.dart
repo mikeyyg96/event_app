@@ -122,7 +122,6 @@ class SearchView extends StatelessWidget {
                   child: Scaffold(
                     backgroundColor: Theme.of(context).accentColor,
                     appBar: TabBar(
-                      isScrollable: false,
                       labelColor: Colors.black,
                       labelStyle: TextStyle(fontWeight: FontWeight.bold),
                       indicatorColor: Colors.black,
@@ -139,8 +138,8 @@ class SearchView extends StatelessWidget {
                       children: <Widget>[
                         Container(
                           color: Colors.white,
-                          height: MediaQuery.of(context).size.height * 0.3,
-                          padding: const EdgeInsets.all(32.0),
+                          // height: MediaQuery.of(context).size.height * 0.3,
+                          padding: const EdgeInsets.fromLTRB(16, 32, 0, 32),
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemCount: model.places.length,
@@ -151,8 +150,8 @@ class SearchView extends StatelessWidget {
                         ),
                         Container(
                           color: Colors.white,
-                          height: MediaQuery.of(context).size.height * 0.3,
-                          padding: const EdgeInsets.all(32.0),
+                          // height: MediaQuery.of(context).size.height * 0.3,
+                          padding: const EdgeInsets.fromLTRB(16, 32, 0, 32),
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemCount: model.places.length,
@@ -163,8 +162,8 @@ class SearchView extends StatelessWidget {
                         ),
                         Container(
                           color: Colors.white,
-                          height: MediaQuery.of(context).size.height * 0.3,
-                          padding: const EdgeInsets.all(32.0),
+                          // height: MediaQuery.of(context).size.height * 0.3,
+                          padding: const EdgeInsets.fromLTRB(16, 32, 0, 32),
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemCount: model.places.length,
@@ -178,9 +177,61 @@ class SearchView extends StatelessWidget {
                   ),
                 ),
               ),
+              Container(
+                color: Colors.white,
+                child: Divider(
+                  color: Theme.of(context).accentColor,
+                  thickness: 1,
+                  indent: 25.0,
+                  endIndent: 25.0,
+                ),
+              ),
+              // Expanded(
+              //   child: Container(
+              //     color: Colors.white,
+              //     padding: const EdgeInsets.fromLTRB(16, 32, 175, 32),
+              //     child: ListView.builder(
+              //       scrollDirection: Axis.horizontal,
+              //       itemCount: model.people.length,
+              //       itemBuilder: (BuildContext context, int index) {
+              //         return model.people[index];
+              //       },
+              //     ),
+              //   ),
+              // ),
+              Container(
+                color: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                child: Text(
+                  'Participants',
+                  style: stylingHeader,
+                ),
+              ),
               Expanded(
                 child: Container(
+                  height: 150,
                   color: Colors.white,
+                  padding: const EdgeInsets.fromLTRB(16.0, 0.0, 95.0, 32.0),
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: model.people.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return model.people[index];
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 32.0),
+                        child: Text(
+                          '+ Add',
+                          style: stylingHeader,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
