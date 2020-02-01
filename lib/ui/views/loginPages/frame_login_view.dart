@@ -59,7 +59,7 @@ class FrameLoginView extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     IconButton(
-                                      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SearchView())),
+                                      onPressed: () => Navigator.of(context).push(model.searchRoute()),
                                       icon: Icon(Icons.search),
                                       color: Colors.white.withOpacity(0.9),
                                       iconSize: 32,

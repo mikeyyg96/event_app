@@ -5,6 +5,9 @@ import 'package:event_app/ui/views/widget_views/content_card_view.dart';
 import 'package:flutter/material.dart';
 import 'package:event_app/ui/shared/styling.dart';
 
+//* Import files for routes transitions
+import 'package:event_app/ui/views/search_view.dart';
+
 class FrameLoginModel extends BaseModel {
   // Temporary
 
@@ -250,6 +253,10 @@ class FrameLoginModel extends BaseModel {
   bool get isTransitioned => _isTransitioned;
   List<Container> get places => _places;
 
+  set transitioned(bool) {
+    _isTransitioned = true;
+  }
+
   void animateDown() {
     setState(ViewState.Busy);
 
@@ -271,10 +278,31 @@ class FrameLoginModel extends BaseModel {
 
   void transition() {
     setState(ViewState.Busy);
-
+    
     _isTransitioned = true;
     notifyListeners();
 
     setState(ViewState.Idle);
   }
+
+  //* Route transition functions
+  Route searchRoute() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => SearchView(),
+      transitionDuration: const Duration(milliseconds: 1000),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        var begin = Offset(-1.0, 0.0);
+        var end = Offset.zero;
+        var curve = Curves.ease;
+
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
+    );
+  }
+  
 }
