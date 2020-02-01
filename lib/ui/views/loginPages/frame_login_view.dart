@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:event_app/core/viewmodels/loginPages/frame_login_model.dart';
 import 'package:event_app/ui/views/base_view.dart';
+import 'package:event_app/ui/views/widget_views/content_card_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -17,22 +18,18 @@ class FrameLoginView extends StatelessWidget {
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 0.9, sigmaY: 0.9),
                     child: Container(
-                      color: Colors.black.withOpacity(0.3),
+                      color: Colors.black.withOpacity(0.5),
                     ),
                   ),
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        image:
-                            AssetImage('assets/background/town_background.jpg'),
-                        fit: BoxFit.fill),
+                        image: AssetImage(model.image), fit: BoxFit.fill),
                   ),
                 )
               : Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        image:
-                            AssetImage('assets/background/town_background.jpg'),
-                        fit: BoxFit.fill),
+                        image: AssetImage(model.image), fit: BoxFit.fill),
                   ),
                 ),
           model.isTransitioned
@@ -78,20 +75,33 @@ class FrameLoginView extends StatelessWidget {
                             ),
                             Container(
                               height: MediaQuery.of(context).size.height * 0.5,
-                              padding: const EdgeInsets.all(64.0),
+                              width: double.infinity,
+                              padding: const EdgeInsets.fromLTRB(64.0, 64.0, 0.0, 64.0),
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                physics: ClampingScrollPhysics(),
+                                scrollDirection: Axis.horizontal,
+                                itemCount: model.events.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return ContentCardView(event: model.events[index],);
+                                },
+                              ),
                             ),
+                            
+                            
+                            
+                            
                             Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.3,
-                                padding: const EdgeInsets.all(32.0),
-                                child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: model.places.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return model.places[index];
-                                  },
-                                ))
+                              height: MediaQuery.of(context).size.height * 0.3,
+                              padding: const EdgeInsets.all(32.0),
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: model.places.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return model.places[index];
+                                },
+                              ),
+                            )
                           ],
                         ),
                       ),

@@ -1,10 +1,72 @@
+import 'package:event_app/core/classes/event.dart';
 import 'package:event_app/core/enums/viewstate.dart';
 import 'package:event_app/core/viewmodels/base_model.dart';
+import 'package:event_app/ui/views/widget_views/content_card_view.dart';
 import 'package:flutter/material.dart';
 import 'package:event_app/ui/shared/styling.dart';
 
 class FrameLoginModel extends BaseModel {
   // Temporary
+
+  List<Event> _events = [
+    Event(
+        name: 'Burger Fridays',
+        category: 'Food',
+        date: DateTime.now(),
+        distance: 2.12,
+        image: 'assets/events/burger_food.jpg',
+        organization: 'Verified',
+        price: 15.00),
+    Event(
+        name: 'Beach Activities',
+        category: 'Outdoor',
+        date: DateTime.now(),
+        distance: 49.33,
+        image: 'assets/events/beach.jpg',
+        organization: 'Verified',
+        price: 5.00),
+    Event(
+        name: 'H20 Hookah Lounge',
+        category: 'Club',
+        date: DateTime.now(),
+        distance: 21.39,
+        image: 'assets/events/concert.jpg',
+        organization: 'Sponsored',
+        price: 40.00),
+    Event(
+        name: 'Gaming Competition',
+        category: 'Gaming',
+        date: DateTime.now(),
+        distance: 16.70,
+        image: 'assets/events/gaming.jpg',
+        organization: 'Verified',
+        price: 20.00),
+    Event(
+        name: 'Group Jogging',
+        category: 'Exercise',
+        date: DateTime.now(),
+        distance: 1.27,
+        image: 'assets/events/jogging.jpg',
+        organization: 'Non-Trusted',
+        price: 0.00),
+    Event(
+        name: 'Sight Seeing',
+        category: 'Outdoors',
+        date: DateTime.now(),
+        distance: 10.93,
+        image: 'assets/events/sight_seeing.jpg',
+        organization: 'Verified',
+        price: 35.00),
+    Event(
+        name: 'Wine Tasting',
+        category: 'Food',
+        date: DateTime.now(),
+        distance: 2.12,
+        image: 'assets/events/wine.jpg',
+        organization: 'Sponsored',
+        price: 40.00),
+  ];
+
   var _places = [
     Container(
       width: 100,
@@ -43,7 +105,7 @@ class FrameLoginModel extends BaseModel {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Icon(
-              Icons.restaurant,
+              Icons.public,
               color: Colors.white,
             ),
             Padding(
@@ -71,7 +133,7 @@ class FrameLoginModel extends BaseModel {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Icon(
-              Icons.restaurant,
+              Icons.schedule,
               color: Colors.white,
             ),
             Padding(
@@ -99,7 +161,7 @@ class FrameLoginModel extends BaseModel {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Icon(
-              Icons.restaurant,
+              Icons.local_bar,
               color: Colors.white,
             ),
             Padding(
@@ -175,9 +237,15 @@ class FrameLoginModel extends BaseModel {
     ),
   ];
 
+  ContentCardView _card = ContentCardView();
+  String _image = 'assets/background/town_background.jpg';
+
   bool _pressed = false;
   bool _isTransitioned = false;
 
+  List<Event> get events => _events;
+  ContentCardView get card => _card;
+  String get image => _image;
   bool get pressed => _pressed;
   bool get isTransitioned => _isTransitioned;
   List<Container> get places => _places;
