@@ -25,9 +25,8 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/background/town_background.jpg
-    - assets/events/login_background.jpg
-    - assets/events/burger_food.jpg
+    - assets/background/
+    - assets/events/
 
 
   fonts:
