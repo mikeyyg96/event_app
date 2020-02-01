@@ -13,7 +13,7 @@ class SearchView extends StatelessWidget {
           color: Theme.of(context).accentColor,
           height: MediaQuery.of(context).size.height,
           child: ListView(
-            physics: NeverScrollableScrollPhysics(),
+            physics: BouncingScrollPhysics(),
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
             children: <Widget>[
