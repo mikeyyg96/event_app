@@ -187,12 +187,20 @@ class SearchModel extends BaseModel {
       child: GestureDetector(
         onTap: () => print('Tapped Avatar'),
         child: CircleAvatar(
+          backgroundColor: Colors.black,
+          radius: 28.0,
+          backgroundImage: AssetImage('assets/people/person_1.jpg'),
+        ),
+      ),
+    ),
+    Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GestureDetector(
+        onTap: () => print('Tapped Avatar'),
+        child: CircleAvatar(
           backgroundColor: Colors.grey,
           radius: 28.0,
-          child: Icon(
-            Icons.person,
-            color: Colors.white,
-          ),
+          backgroundImage: AssetImage('assets/people/person_2.jpg'),
         ),
       ),
     ),
@@ -203,10 +211,7 @@ class SearchModel extends BaseModel {
         child: CircleAvatar(
           backgroundColor: Colors.black,
           radius: 28.0,
-          child: Icon(
-            Icons.person,
-            color: Colors.white,
-          ),
+          backgroundImage: AssetImage('assets/people/person_3.jpg'),
         ),
       ),
     ),
@@ -217,24 +222,7 @@ class SearchModel extends BaseModel {
         child: CircleAvatar(
           backgroundColor: Colors.grey,
           radius: 28.0,
-          child: Icon(
-            Icons.person,
-            color: Colors.white,
-          ),
-        ),
-      ),
-    ),
-    Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: GestureDetector(
-        onTap: () => print('Tapped Avatar'),
-        child: CircleAvatar(
-          backgroundColor: Colors.black,
-          radius: 28.0,
-          child: Icon(
-            Icons.person,
-            color: Colors.white,
-          ),
+          backgroundImage: AssetImage('assets/people/person_4.jpg'),
         ),
       ),
     ),
@@ -245,10 +233,7 @@ class SearchModel extends BaseModel {
         child: CircleAvatar(
           backgroundColor: Colors.grey,
           radius: 28.0,
-          child: Icon(
-            Icons.person,
-            color: Colors.white,
-          ),
+          backgroundImage: AssetImage('assets/people/person_5.jpg'),
         ),
       ),
     ),

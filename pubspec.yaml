@@ -27,6 +27,7 @@ flutter:
   assets:
     - assets/background/
     - assets/events/
+    - assets/people/
 
 
   fonts:

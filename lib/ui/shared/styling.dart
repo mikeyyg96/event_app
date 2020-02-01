@@ -13,3 +13,5 @@ final stylingInactiveCardNumItalics = const TextStyle(color: Colors.white, fontS
 final stylingHeader = const TextStyle(fontSize: 28.0, color: Colors.black, fontWeight: FontWeight.bold);
 
 final stylingInputText = const TextStyle(color: Colors.black, fontSize: 20.0);
+
+final stylingLocationText = const TextStyle(color: Color(0xFFAF9164), fontSize: 16.0);
