@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:event_app/core/viewmodels/loginPages/frame_login_model.dart';
 import 'package:event_app/ui/views/base_view.dart';
+import 'package:event_app/ui/views/search_view.dart';
 import 'package:event_app/ui/views/widget_views/content_card_view.dart';
 import 'package:flutter/material.dart';
 
@@ -58,7 +59,7 @@ class FrameLoginView extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     IconButton(
-                                      onPressed: () => print('hello world'),
+                                      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SearchView())),
                                       icon: Icon(Icons.search),
                                       color: Colors.white.withOpacity(0.9),
                                       iconSize: 32,
