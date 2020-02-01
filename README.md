@@ -1,16 +1,15 @@
 # event_app
 
-A new Flutter project.
+Find or Create local events
 
-## Getting Started
+## Pics
 
-This project is a starting point for a Flutter application.
+![screen_shot_1](https://user-images.githubusercontent.com/33616962/73596811-c28d4000-44f3-11ea-8a31-4eec523eea5e.jpg)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+![screen_shot_2](https://user-images.githubusercontent.com/33616962/73596812-c4ef9a00-44f3-11ea-95ff-2ee091b22436.jpg)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Inspired by Dribble Design
+
+![Annotation 2020-02-01 131026](https://user-images.githubusercontent.com/33616962/73596869-52cb8500-44f4-11ea-913d-7c70c72e1c8a.png)
+
