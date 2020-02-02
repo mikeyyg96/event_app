@@ -66,7 +66,7 @@ class FrameLoginView extends StatelessWidget {
                                     ),
                                     IconButton(
                                       onPressed: () => model.animateUp(),
-                                      icon: Icon(Icons.settings),
+                                      icon: Icon(Icons.tune),
                                       color: Colors.white.withOpacity(0.75),
                                       iconSize: 32,
                                     ),
