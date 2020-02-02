@@ -98,8 +98,11 @@ class SearchView extends StatelessWidget {
                           onChanged: (value) {},
                           // controller: Controller Goes Here,
                           autocorrect: true,
+                          
                           style: stylingInputText,
                           decoration: InputDecoration(
+                            hintText: 'Enter city or name of event',
+                            hintStyle: stylingInputHintText,
                             prefixIcon: Icon(
                               Icons.search,
                               color: Theme.of(context).primaryColor,

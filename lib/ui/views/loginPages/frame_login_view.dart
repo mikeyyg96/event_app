@@ -61,13 +61,13 @@ class FrameLoginView extends StatelessWidget {
                                     IconButton(
                                       onPressed: () => Navigator.of(context).push(model.searchRoute()),
                                       icon: Icon(Icons.search),
-                                      color: Colors.white.withOpacity(0.9),
+                                      color: Colors.white.withOpacity(0.75),
                                       iconSize: 32,
                                     ),
                                     IconButton(
                                       onPressed: () => model.animateUp(),
                                       icon: Icon(Icons.settings),
-                                      color: Colors.white.withOpacity(0.9),
+                                      color: Colors.white.withOpacity(0.75),
                                       iconSize: 32,
                                     ),
                                   ],

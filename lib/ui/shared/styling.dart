@@ -16,4 +16,6 @@ final stylingHeader = const TextStyle(fontSize: 28.0, color: Colors.black, fontW
 
 final stylingInputText = const TextStyle(color: Colors.black, fontSize: 20.0);
 
+final stylingInputHintText = const TextStyle(color: Colors.black38, fontSize: 20.0, fontStyle: FontStyle.italic);
+
 final stylingLocationText = const TextStyle(color: Color(0xFFAF9164), fontSize: 16.0);
