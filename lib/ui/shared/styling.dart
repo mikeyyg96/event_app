@@ -8,6 +8,8 @@ final stylingActiveCardNum = const TextStyle(color: Colors.black54, fontSize: 16
 
 final stylingInactiveCardNum = const TextStyle(color: Colors.white, fontSize: 16.0);
 
+final stylingActiveCardNumItalics = const TextStyle(color: Colors.black54, fontSize: 16.0, fontStyle: FontStyle.italic);
+
 final stylingInactiveCardNumItalics = const TextStyle(color: Colors.white, fontSize: 16.0, fontStyle: FontStyle.italic);
 
 final stylingHeader = const TextStyle(fontSize: 28.0, color: Colors.black, fontWeight: FontWeight.bold);

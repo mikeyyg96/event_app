@@ -1,4 +1,5 @@
 import 'package:event_app/core/viewmodels/contentPages/event_details_model.dart';
+import 'package:event_app/core/viewmodels/widget_models/content_category_model.dart';
 import 'package:get_it/get_it.dart';
 
 import 'core/viewmodels/loginPages/frame_login_model.dart';
@@ -12,5 +13,6 @@ void setupLocator() {
 
   locator.registerFactory(() => SearchModel());
   locator.registerFactory(() => ContentCardModel());
+  locator.registerFactory(() => ContentCategoryModel());
   locator.registerFactory(() => EventDetailsModel());
 }

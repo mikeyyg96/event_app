@@ -77,14 +77,14 @@ class FrameLoginView extends StatelessWidget {
                             Container(
                               height: MediaQuery.of(context).size.height * 0.5,
                               width: double.infinity,
-                              padding: const EdgeInsets.fromLTRB(64.0, 64.0, 0.0, 64.0),
+                              padding: const EdgeInsets.fromLTRB(32.0, 64.0, 0.0, 64.0),
                               child: ListView.builder(
                                 shrinkWrap: true,
                                 physics: ClampingScrollPhysics(),
                                 scrollDirection: Axis.horizontal,
                                 itemCount: model.events.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  return ContentCardView(event: model.events[index],);
+                                  return ContentCardView(event: model.events[index], onSearch: false,);
                                 },
                               ),
                             ),
@@ -101,6 +101,7 @@ class FrameLoginView extends StatelessWidget {
                                 itemBuilder: (BuildContext context, int index) {
                                   return model.places[index];
                                 },
+                                
                               ),
                             )
                           ],

@@ -6,17 +6,21 @@ import 'package:flutter/material.dart';
 import '../base_view.dart';
 
 class ContentCardView extends StatelessWidget {
-  ContentCardView({this.event});
+  ContentCardView({this.event, this.onSearch});
 
   final Event event;
+  final bool onSearch;
 
   @override
   Widget build(BuildContext context) {
     return BaseView<ContentCardModel>(
       builder: (context, model, child) => Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.fromLTRB(0.0, 16.0, 16.0, 16.0),
         child: Container(
-          color: Colors.black38,
+          decoration: BoxDecoration(
+            color: onSearch ? Colors.white : Colors.black38,
+            border: Border.all(color: Colors.black38, width: 0.1)
+          ),
           child: Column(
             children: <Widget>[
               Container(
@@ -96,10 +100,10 @@ class ContentCardView extends StatelessWidget {
                   ],
                 ),
               ),
-              Text(event.name, style: stylingInactiveCard),
+              Text(event.name, style: onSearch ? stylingActiveCard : stylingInactiveCard),
               Text(
                 '- ' + event.organization + ' -',
-                style: stylingInactiveCardNumItalics,
+                style: onSearch ? stylingActiveCardNumItalics : stylingInactiveCardNumItalics,
               ),
               Expanded(
                 child: Container(
@@ -110,7 +114,7 @@ class ContentCardView extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         event.description,
-                        style: stylingInactiveCardNum,
+                        style: onSearch ? stylingActiveCardNum : stylingInactiveCardNum,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
                         maxLines: 2,
@@ -127,7 +131,7 @@ class ContentCardView extends StatelessWidget {
                   onTap: () => print('Read More'),
                   child: Text(
                     'Read More',
-                    style: stylingInactiveCardNumItalics,
+                    style: onSearch ? stylingActiveCardNumItalics : stylingInactiveCardNumItalics,
                   ),
                 ),
               ),

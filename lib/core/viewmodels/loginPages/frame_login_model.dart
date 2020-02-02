@@ -1,9 +1,10 @@
+import 'package:event_app/core/classes/category.dart';
 import 'package:event_app/core/classes/event.dart';
 import 'package:event_app/core/enums/viewstate.dart';
 import 'package:event_app/core/viewmodels/base_model.dart';
 import 'package:event_app/ui/views/widget_views/content_card_view.dart';
+import 'package:event_app/ui/views/widget_views/content_category_view.dart';
 import 'package:flutter/material.dart';
-import 'package:event_app/ui/shared/styling.dart';
 
 //* Import files for routes transitions
 import 'package:event_app/ui/views/search_view.dart';
@@ -71,173 +72,12 @@ class FrameLoginModel extends BaseModel {
   ];
 
   var _places = [
-    Container(
-      width: 100,
-      child: Card(
-        child: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Icon(
-              Icons.restaurant,
-              color: Colors.black54,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: Text(
-                'Food',
-                style: stylingActiveCard,
-              ),
-            ),
-            Text(
-              '6x',
-              style: stylingActiveCardNum,
-            )
-          ],
-        )),
-      ),
-    ),
-    Container(
-      width: 100,
-      child: Card(
-        color: Colors.black38,
-        child: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Icon(
-              Icons.public,
-              color: Colors.white,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: Text(
-                'Culture',
-                style: stylingInactiveCard,
-              ),
-            ),
-            Text(
-              '6x',
-              style: stylingInactiveCardNum,
-            )
-          ],
-        )),
-      ),
-    ),
-    Container(
-      width: 100,
-      child: Card(
-        color: Colors.black38,
-        child: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Icon(
-              Icons.schedule,
-              color: Colors.white,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: Text(
-                'History',
-                style: stylingInactiveCard,
-              ),
-            ),
-            Text(
-              '6x',
-              style: stylingInactiveCardNum,
-            )
-          ],
-        )),
-      ),
-    ),
-    Container(
-      width: 100,
-      child: Card(
-        color: Colors.black38,
-        child: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Icon(
-              Icons.local_bar,
-              color: Colors.white,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: Text(
-                'Clubs',
-                style: stylingInactiveCard,
-              ),
-            ),
-            Text(
-              '6x',
-              style: stylingInactiveCardNum,
-            )
-          ],
-        )),
-      ),
-    ),
-    Container(
-      width: 100,
-      child: Card(
-        color: Colors.black38,
-        child: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Icon(
-              Icons.restaurant,
-              color: Colors.white,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: Text(
-                'Outdoors',
-                style: stylingInactiveCard,
-              ),
-            ),
-            Text(
-              '6x',
-              style: stylingInactiveCardNum,
-            )
-          ],
-        )),
-      ),
-    ),
-    Container(
-      width: 100,
-      child: Card(
-        color: Colors.black38,
-        child: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Icon(
-              Icons.restaurant,
-              color: Colors.white,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: Text(
-                'Food',
-                style: stylingInactiveCard,
-              ),
-            ),
-            Text(
-              '6x',
-              style: stylingInactiveCardNum,
-            )
-          ],
-        )),
-      ),
-    ),
+    ContentCategoryView(category: new Category(category: 'Food', counter: 6, iconData: Icons.restaurant),),
+    ContentCategoryView(category: new Category(category: 'Culture', counter: 1, iconData: Icons.group)),
+    ContentCategoryView(category: new Category(category: 'History', counter: 4, iconData: Icons.history)),
+    ContentCategoryView(category: new Category(category: 'Club', counter: 3, iconData: Icons.local_bar)),
+    ContentCategoryView(category: new Category(category: 'Outdoor', counter: 2, iconData: Icons.local_activity)),
+    ContentCategoryView(category: new Category(category: 'Gaming', counter: 0, iconData: Icons.gamepad)),
   ];
 
   ContentCardView _card = ContentCardView();
@@ -251,10 +91,19 @@ class FrameLoginModel extends BaseModel {
   String get image => _image;
   bool get pressed => _pressed;
   bool get isTransitioned => _isTransitioned;
-  List<Container> get places => _places;
+  List<ContentCategoryView> get places => _places;
 
   set transitioned(bool) {
     _isTransitioned = true;
+  }
+
+  void activateCard(int index) {
+    setState(ViewState.Busy);
+
+
+    notifyListeners();
+
+    setState(ViewState.Idle);
   }
 
   void animateDown() {
@@ -278,7 +127,7 @@ class FrameLoginModel extends BaseModel {
 
   void transition() {
     setState(ViewState.Busy);
-    
+
     _isTransitioned = true;
     notifyListeners();
 
@@ -295,7 +144,8 @@ class FrameLoginModel extends BaseModel {
         var end = Offset.zero;
         var curve = Curves.ease;
 
-        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
         return SlideTransition(
           position: animation.drive(tween),
@@ -304,5 +154,4 @@ class FrameLoginModel extends BaseModel {
       },
     );
   }
-  
 }

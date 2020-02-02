@@ -1,184 +1,67 @@
+import 'package:event_app/core/classes/event.dart';
 import 'package:event_app/core/enums/viewstate.dart';
 import 'package:event_app/core/viewmodels/base_model.dart';
 import 'package:flutter/material.dart';
-import 'package:event_app/ui/shared/styling.dart';
 
 class SearchModel extends BaseModel {
-  List<Widget> _places = [
-    Container(
-      height: 25,
-      width: 160,
-      child: Card(
-        color: Colors.black38,
-        child: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Icon(
-              Icons.restaurant,
-              color: Colors.white,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: Text(
-                'Food',
-                style: stylingInactiveCard,
-              ),
-            ),
-            Text(
-              '6x',
-              style: stylingInactiveCardNum,
-            )
-          ],
-        )),
-      ),
-    ),
-    Container(
-      height: 25,
-      width: 160,
-      child: Card(
-        color: Colors.black38,
-        child: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Icon(
-              Icons.restaurant,
-              color: Colors.white,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: Text(
-                'Culture',
-                style: stylingInactiveCard,
-              ),
-            ),
-            Text(
-              '6x',
-              style: stylingInactiveCardNum,
-            )
-          ],
-        )),
-      ),
-    ),
-    Container(
-      height: 25,
-      width: 160,
-      child: Card(
-        color: Colors.black38,
-        child: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Icon(
-              Icons.restaurant,
-              color: Colors.white,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: Text(
-                'History',
-                style: stylingInactiveCard,
-              ),
-            ),
-            Text(
-              '6x',
-              style: stylingInactiveCardNum,
-            )
-          ],
-        )),
-      ),
-    ),
-    Container(
-      height: 25,
-      width: 160,
-      child: Card(
-        color: Colors.black38,
-        child: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Icon(
-              Icons.restaurant,
-              color: Colors.white,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: Text(
-                'Clubs',
-                style: stylingInactiveCard,
-              ),
-            ),
-            Text(
-              '6x',
-              style: stylingInactiveCardNum,
-            )
-          ],
-        )),
-      ),
-    ),
-    Container(
-      height: 25,
-      width: 160,
-      child: Card(
-        color: Colors.black38,
-        child: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Icon(
-              Icons.restaurant,
-              color: Colors.white,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: Text(
-                'Outdoors',
-                style: stylingInactiveCard,
-              ),
-            ),
-            Text(
-              '6x',
-              style: stylingInactiveCardNum,
-            )
-          ],
-        )),
-      ),
-    ),
-    Container(
-      height: 25,
-      width: 160,
-      child: Card(
-        color: Colors.black38,
-        child: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Icon(
-              Icons.restaurant,
-              color: Colors.white,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: Text(
-                'Food',
-                style: stylingInactiveCard,
-              ),
-            ),
-            Text(
-              '6x',
-              style: stylingInactiveCardNum,
-            )
-          ],
-        )),
-      ),
-    ),
+
+  List<Event> _events = [
+    Event(
+        name: 'Burger Fridays',
+        category: 'Food',
+        date: DateTime.now(),
+        distance: 2.12,
+        image: 'assets/events/burger_food.jpg',
+        organization: 'Verified',
+        price: 15.00),
+    Event(
+        name: 'Beach Activities',
+        category: 'Outdoor',
+        date: DateTime.now(),
+        distance: 49.33,
+        image: 'assets/events/beach.jpg',
+        organization: 'Verified',
+        price: 5.00),
+    Event(
+        name: 'H20 Hookah Lounge',
+        category: 'Club',
+        date: DateTime.now(),
+        distance: 21.39,
+        image: 'assets/events/concert.jpg',
+        organization: 'Sponsored',
+        price: 40.00),
+    Event(
+        name: 'Gaming Competition',
+        category: 'Gaming',
+        date: DateTime.now(),
+        distance: 16.70,
+        image: 'assets/events/gaming.jpg',
+        organization: 'Verified',
+        price: 20.00),
+    Event(
+        name: 'Group Jogging',
+        category: 'Exercise',
+        date: DateTime.now(),
+        distance: 1.27,
+        image: 'assets/events/jogging.jpg',
+        organization: 'Non-Trusted',
+        price: 0.00),
+    Event(
+        name: 'Sight Seeing',
+        category: 'Outdoors',
+        date: DateTime.now(),
+        distance: 10.93,
+        image: 'assets/events/sight_seeing.jpg',
+        organization: 'Verified',
+        price: 35.00),
+    Event(
+        name: 'Wine Tasting',
+        category: 'Food',
+        date: DateTime.now(),
+        distance: 2.12,
+        image: 'assets/events/wine.jpg',
+        organization: 'Sponsored',
+        price: 40.00),
   ];
 
   List<Widget> _people = [
@@ -242,7 +125,7 @@ class SearchModel extends BaseModel {
   bool _pressed = false;
 
   bool get pressed => _pressed;
-  List<Widget> get places => _places;
+  List<Event> get events => _events;
   List<Widget> get people => _people;
 
   void transition() {
