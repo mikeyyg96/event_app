@@ -27,7 +27,7 @@ class SearchView extends StatelessWidget {
                       Container(
                         color: Theme.of(context).accentColor,
                         child: IconButton(
-                          onPressed: () => print('Button pressed'),
+                          onPressed: () => Navigator.pop(context),
                           iconSize: 32.0,
                           color: Colors.black,
                           icon: Icon(Icons.arrow_back),
