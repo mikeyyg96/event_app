@@ -72,12 +72,12 @@ class FrameLoginModel extends BaseModel {
   ];
 
   var _places = [
-    ContentCategoryView(category: new Category(category: 'Food', counter: 6, iconData: Icons.restaurant),),
-    ContentCategoryView(category: new Category(category: 'Culture', counter: 1, iconData: Icons.group)),
-    ContentCategoryView(category: new Category(category: 'History', counter: 4, iconData: Icons.history)),
-    ContentCategoryView(category: new Category(category: 'Club', counter: 3, iconData: Icons.local_bar)),
-    ContentCategoryView(category: new Category(category: 'Outdoor', counter: 2, iconData: Icons.local_activity)),
-    ContentCategoryView(category: new Category(category: 'Gaming', counter: 0, iconData: Icons.gamepad)),
+    Category(category: 'Food', counter: 6, iconData: Icons.restaurant),
+    Category(category: 'Culture', counter: 1, iconData: Icons.group),
+    Category(category: 'History', counter: 4, iconData: Icons.history),
+    Category(category: 'Club', counter: 3, iconData: Icons.local_bar),
+    Category(category: 'Outdoor', counter: 2, iconData: Icons.local_activity),
+    Category(category: 'Gaming', counter: 0, iconData: Icons.gamepad),
   ];
 
   ContentCardView _card = ContentCardView();
@@ -91,7 +91,15 @@ class FrameLoginModel extends BaseModel {
   String get image => _image;
   bool get pressed => _pressed;
   bool get isTransitioned => _isTransitioned;
-  List<ContentCategoryView> get places => _places;
+  List<Category> get places => _places;
+
+  void refreshUI() {
+    setState(ViewState.Busy);
+
+    notifyListeners();
+
+    setState(ViewState.Idle);
+  }
 
   set transitioned(bool) {
     _isTransitioned = true;

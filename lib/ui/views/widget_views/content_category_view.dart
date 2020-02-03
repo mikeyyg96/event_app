@@ -6,9 +6,10 @@ import 'package:flutter/material.dart';
 
 class ContentCategoryView extends StatelessWidget {
 
-  ContentCategoryView({this.category});
+  ContentCategoryView({this.category, this.callback});
 
   final Category category;
+  final VoidCallback callback;
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +18,10 @@ class ContentCategoryView extends StatelessWidget {
       onTap: () {
         if (model.active) {
           model.deactivate();
+          callback();
         } else {
           model.activate();
+          callback();
         }
       },
       child: Container(

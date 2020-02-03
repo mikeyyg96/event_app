@@ -4,6 +4,7 @@ import 'package:event_app/core/viewmodels/loginPages/frame_login_model.dart';
 import 'package:event_app/ui/views/base_view.dart';
 import 'package:event_app/ui/views/search_view.dart';
 import 'package:event_app/ui/views/widget_views/content_card_view.dart';
+import 'package:event_app/ui/views/widget_views/content_category_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -88,10 +89,6 @@ class FrameLoginView extends StatelessWidget {
                                 },
                               ),
                             ),
-                            
-                            
-                            
-                            
                             Container(
                               height: MediaQuery.of(context).size.height * 0.3,
                               padding: const EdgeInsets.all(32.0),
@@ -99,7 +96,7 @@ class FrameLoginView extends StatelessWidget {
                                 scrollDirection: Axis.horizontal,
                                 itemCount: model.places.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  return model.places[index];
+                                  return ContentCategoryView(category: model.places[index], callback: model.refreshUI);
                                 },
                                 
                               ),
