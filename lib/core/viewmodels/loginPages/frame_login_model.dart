@@ -1,5 +1,6 @@
 import 'package:event_app/core/classes/category.dart';
 import 'package:event_app/core/classes/event.dart';
+import 'package:event_app/core/data/placeholders.dart';
 import 'package:event_app/core/enums/viewstate.dart';
 import 'package:event_app/core/viewmodels/base_model.dart';
 import 'package:event_app/ui/views/widget_views/content_card_view.dart';
@@ -96,23 +97,19 @@ class FrameLoginModel extends BaseModel {
   void refreshUI() {
     setState(ViewState.Busy);
 
+    filteredEvents.clear();
+    _events.forEach((Event event) {
+      filters.forEach((String filter) {
+        if (filter == event.category) {
+          filteredEvents.add(event);
+        }
+      });
+    });
     notifyListeners();
 
     setState(ViewState.Idle);
   }
 
-  set transitioned(bool) {
-    _isTransitioned = true;
-  }
-
-  void activateCard(int index) {
-    setState(ViewState.Busy);
-
-
-    notifyListeners();
-
-    setState(ViewState.Idle);
-  }
 
   void animateDown() {
     setState(ViewState.Busy);

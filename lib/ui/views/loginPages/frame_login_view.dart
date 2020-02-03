@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:event_app/core/data/placeholders.dart';
 import 'package:event_app/core/viewmodels/loginPages/frame_login_model.dart';
 import 'package:event_app/ui/views/base_view.dart';
 import 'package:event_app/ui/views/search_view.dart';
@@ -83,9 +84,9 @@ class FrameLoginView extends StatelessWidget {
                                 shrinkWrap: true,
                                 physics: ClampingScrollPhysics(),
                                 scrollDirection: Axis.horizontal,
-                                itemCount: model.events.length,
+                                itemCount: filteredEvents.isEmpty ? model.events.length : filteredEvents.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  return ContentCardView(event: model.events[index], onSearch: false,);
+                                  return ContentCardView(event: filteredEvents.isEmpty ? model.events[index] : filteredEvents[index], onSearch: false,);
                                 },
                               ),
                             ),

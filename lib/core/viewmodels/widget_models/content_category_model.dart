@@ -1,29 +1,25 @@
+import 'package:event_app/core/data/placeholders.dart';
 import 'package:event_app/core/enums/viewstate.dart';
 import 'package:event_app/core/viewmodels/base_model.dart';
-import 'package:event_app/core/viewmodels/loginPages/frame_login_model.dart';
-import 'package:event_app/core/viewmodels/widget_models/content_card_model.dart';
 
 class ContentCategoryModel extends BaseModel {
   bool _active = false;
   bool get active => _active;
 
-  FrameLoginModel frameModel = new FrameLoginModel();
-  ContentCardModel contentCardModel = new ContentCardModel();
-
-  void activate() {
+  void activate(String filter) {
     setState(ViewState.Busy);
 
     _active = true;
-    frameModel.refreshUI();
-    contentCardModel.refreshUI();
+    filters.add(filter);
     notifyListeners();
     setState(ViewState.Idle);
   }
 
-  void deactivate() {
+  void deactivate(String filter) {
     setState(ViewState.Busy);
 
     _active = false;
+    filters.remove(filter);
     notifyListeners();
 
     setState(ViewState.Idle);

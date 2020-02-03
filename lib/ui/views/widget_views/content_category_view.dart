@@ -17,10 +17,10 @@ class ContentCategoryView extends StatelessWidget {
       builder: (context, model, child) => GestureDetector(
       onTap: () {
         if (model.active) {
-          model.deactivate();
+          model.deactivate(category.category);
           callback();
         } else {
-          model.activate();
+          model.activate(category.category);
           callback();
         }
       },
