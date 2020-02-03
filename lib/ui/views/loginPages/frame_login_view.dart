@@ -3,12 +3,16 @@ import 'dart:ui';
 import 'package:event_app/core/data/placeholders.dart';
 import 'package:event_app/core/viewmodels/loginPages/frame_login_model.dart';
 import 'package:event_app/ui/views/base_view.dart';
-import 'package:event_app/ui/views/search_view.dart';
 import 'package:event_app/ui/views/widget_views/content_card_view.dart';
 import 'package:event_app/ui/views/widget_views/content_category_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+
+// Data
+import 'package:event_app/core/data/events.dart';
+import 'package:event_app/core/data/categories.dart';
+
 
 class FrameLoginView extends StatelessWidget {
   @override
@@ -84,9 +88,9 @@ class FrameLoginView extends StatelessWidget {
                                 shrinkWrap: true,
                                 physics: ClampingScrollPhysics(),
                                 scrollDirection: Axis.horizontal,
-                                itemCount: filteredEvents.isEmpty ? model.events.length : filteredEvents.length,
+                                itemCount: filteredEvents.isEmpty ? events.length : filteredEvents.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  return ContentCardView(event: filteredEvents.isEmpty ? model.events[index] : filteredEvents[index], onSearch: false,);
+                                  return ContentCardView(event: filteredEvents.isEmpty ? events[index] : filteredEvents[index], onSearch: false,);
                                 },
                               ),
                             ),
@@ -95,9 +99,9 @@ class FrameLoginView extends StatelessWidget {
                               padding: const EdgeInsets.all(32.0),
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
-                                itemCount: model.places.length,
+                                itemCount: categories.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  return ContentCategoryView(category: model.places[index], callback: model.refreshUI);
+                                  return ContentCategoryView(category: categories[index], callback: model.refreshUI);
                                 },
                                 
                               ),
