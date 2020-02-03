@@ -170,7 +170,8 @@ class SearchView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Expanded(
+          Container(
+            height: MediaQuery.of(context).size.height / 3,
             child: ListView.builder(
               physics: ClampingScrollPhysics(),
               scrollDirection: Axis.horizontal,
@@ -200,7 +201,7 @@ class SearchView extends StatelessWidget {
             ),
           ),
           Container(
-            height: 70,
+            height: MediaQuery.of(context).size.height / 12,
             color: Colors.white,
             padding: const EdgeInsets.fromLTRB(16.0, 0.0, 95.0, 0.0),
             child: Row(
