@@ -4,8 +4,10 @@ import 'package:flutter_date_pickers/flutter_date_pickers.dart';
 import '../base_model.dart';
 
 class PreferencesModel extends BaseModel {
+
   double _startPrice = 20.0, _endPrice = 60.0;
   double _startMiles = 20.0, _endMiles = 60.0;
+
   DatePeriod _period = DatePeriod(DateTime.now().subtract(Duration(days: 1)), DateTime.now().add(Duration(days: 1)));
 
   double get startPrice => _startPrice;

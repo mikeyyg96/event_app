@@ -1,6 +1,8 @@
 import 'package:event_app/core/viewmodels/contentPages/preferences_model.dart';
+import 'package:event_app/core/viewmodels/widget_models/organization_card_model.dart';
 import 'package:event_app/ui/shared/styling.dart';
 import 'package:event_app/ui/views/base_view.dart';
+import 'package:event_app/ui/views/widget_views/organization_card_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_date_pickers/flutter_date_pickers.dart';
 import 'package:flutter_range_slider/flutter_range_slider.dart' as frs;
@@ -38,102 +40,9 @@ class PreferencesView extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0))),
-                          elevation: 12,
-                          child: Container(
-                            height: 80,
-                            width: 80,
-                            decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20.0)),
-                                color: Theme.of(context).primaryColor),
-                            child: Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.person,
-                                    color: Colors.white,
-                                  ),
-                                  Text(
-                                    'Non-Trusted',
-                                    style: stylingInactiveCardNum,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0))),
-                          elevation: 12,
-                          child: Container(
-                            height: 80,
-                            width: 80,
-                            decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20.0)),
-                                color: Colors.white),
-                            child: Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.star,
-                                    color: Colors.black54,
-                                  ),
-                                  Text(
-                                    'Verified',
-                                    style: stylingActiveCardNum,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0))),
-                          elevation: 12,
-                          child: Container(
-                            height: 80,
-                            width: 80,
-                            decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20.0)),
-                                color: Colors.white),
-                            child: Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.local_atm,
-                                    color: Colors.black54,
-                                  ),
-                                  Text(
-                                    'Sponsored',
-                                    style: stylingActiveCardNum,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                      OrganizationCardView(type: 'Non-Trusted', icon: Icons.person),
+                      OrganizationCardView(type: 'Verified', icon: Icons.star),
+                      OrganizationCardView(type: 'Sponsored', icon: Icons.local_atm),
                     ],
                   ),
                 ),
@@ -146,36 +55,50 @@ class PreferencesView extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: SliderTheme(
-                    data: SliderTheme.of(context).copyWith(
-                      activeTickMarkColor: Colors.black54,
-                      activeTrackColor: Theme.of(context).primaryColor,
-                      thumbColor:
-                          Theme.of(context).primaryColor.withOpacity(0.9),
-                      inactiveTrackColor: Colors.grey,
-                      overlayColor:
-                          Theme.of(context).primaryColor.withOpacity(0.5),
-                      valueIndicatorColor: Colors.black54,
-                    ),
-                    child: frs.RangeSlider(
-                      lowerValue: model.startPrice,
-                      upperValue: model.endPrice,
-                      divisions: 5,
-                      min: 0,
-                      max: 100,
-                      onChanged: (double start, double end) {
-                        model.changeValuesPrice(start, end);
-                      },
-                      showValueIndicator: true,
-                      valueIndicatorFormatter: (int index, double value) {
-                        String noDecimals = value.toStringAsFixed(0);
-                        if (value == 100) {
-                          return '\$$noDecimals +';
-                        } else {
-                          return '\$$noDecimals';
-                        }
-                      },
-                    ),
+                  child: Row(
+                    children: <Widget>[
+                      Text('\$${model.startPrice.toStringAsFixed(0)}',
+                          style: stylingActiveCardNum),
+                      Expanded(
+                        child: SliderTheme(
+                          data: SliderTheme.of(context).copyWith(
+                            activeTickMarkColor: Colors.black54,
+                            activeTrackColor: Theme.of(context).primaryColor,
+                            thumbColor:
+                                Theme.of(context).primaryColor.withOpacity(0.9),
+                            inactiveTrackColor: Colors.grey,
+                            overlayColor:
+                                Theme.of(context).primaryColor.withOpacity(0.5),
+                            valueIndicatorColor: Colors.black54,
+                          ),
+                          child: frs.RangeSlider(
+                            lowerValue: model.startPrice,
+                            upperValue: model.endPrice,
+                            divisions: 5,
+                            min: 0,
+                            max: 100,
+                            onChanged: (double start, double end) {
+                              model.changeValuesPrice(start, end);
+                            },
+                            showValueIndicator: true,
+                            valueIndicatorFormatter: (int index, double value) {
+                              String noDecimals = value.toStringAsFixed(0);
+                              if (value == 100) {
+                                return '\$$noDecimals +';
+                              } else {
+                                return '\$$noDecimals';
+                              }
+                            },
+                          ),
+                        ),
+                      ),
+                      Text(
+                        model.endPrice == 100
+                            ? '\$${model.endPrice.toStringAsFixed(0)} +'
+                            : '\$${model.endPrice.toStringAsFixed(0)}',
+                        style: stylingActiveCardNum,
+                      )
+                    ],
                   ),
                 ),
                 Padding(
@@ -187,35 +110,47 @@ class PreferencesView extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: SliderTheme(
-                    data: SliderTheme.of(context).copyWith(
-                        activeTickMarkColor: Colors.black54,
-                        activeTrackColor: Theme.of(context).primaryColor,
-                        thumbColor:
-                            Theme.of(context).primaryColor.withOpacity(0.9),
-                        inactiveTrackColor: Colors.grey,
-                        overlayColor:
-                            Theme.of(context).primaryColor.withOpacity(0.5),
-                        valueIndicatorColor: Colors.black54),
-                    child: frs.RangeSlider(
-                      lowerValue: model.startMiles,
-                      upperValue: model.endMiles,
-                      divisions: 5,
-                      min: 0,
-                      max: 100,
-                      onChanged: (double start, double end) {
-                        model.changeValuesMiles(start, end);
-                      },
-                      showValueIndicator: true,
-                      valueIndicatorFormatter: (int index, double value) {
-                        String noDecimals = value.toStringAsFixed(0);
-                        if (value == 100) {
-                          return '$noDecimals + Miles';
-                        } else {
-                          return '$noDecimals Miles';
-                        }
-                      },
-                    ),
+                  child: Row(
+                    children: <Widget>[
+                      Text('${model.startMiles.toStringAsFixed(0)}',
+                          style: stylingActiveCardNum),
+                      Expanded(
+                        child: SliderTheme(
+                          data: SliderTheme.of(context).copyWith(
+                              activeTickMarkColor: Colors.black54,
+                              activeTrackColor: Theme.of(context).primaryColor,
+                              thumbColor: Theme.of(context)
+                                  .primaryColor
+                                  .withOpacity(0.9),
+                              inactiveTrackColor: Colors.grey,
+                              overlayColor: Theme.of(context)
+                                  .primaryColor
+                                  .withOpacity(0.5),
+                              valueIndicatorColor: Colors.black54),
+                          child: frs.RangeSlider(
+                            lowerValue: model.startMiles,
+                            upperValue: model.endMiles,
+                            divisions: 5,
+                            min: 0,
+                            max: 100,
+                            onChanged: (double start, double end) {
+                              model.changeValuesMiles(start, end);
+                            },
+                            showValueIndicator: true,
+                            valueIndicatorFormatter: (int index, double value) {
+                              String noDecimals = value.toStringAsFixed(0);
+                              if (value == 100) {
+                                return '$noDecimals + Miles';
+                              } else {
+                                return '$noDecimals Miles';
+                              }
+                            },
+                          ),
+                        ),
+                      ),
+                      Text(model.endMiles == 100 ? '${model.endMiles.toStringAsFixed(0)} +' : '${model.endMiles.toStringAsFixed(0)}',
+                          style: stylingActiveCardNum),
+                    ],
                   ),
                 ),
                 Padding(
@@ -267,15 +202,16 @@ class PreferencesView extends StatelessWidget {
                       height: 50,
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                        boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 5.0,
-                        ),
-                      ]),
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          color: Theme.of(context).accentColor,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey,
+                              blurRadius: 5.0,
+                            ),
+                          ]),
                       child: Center(
-                        child: Text('Save Changes', style: stylingHeaderWhite),
+                        child: Text('Save Changes', style: stylingActiveCard),
                       ),
                     ),
                   ),

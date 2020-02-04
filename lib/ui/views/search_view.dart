@@ -1,3 +1,6 @@
+import 'package:event_app/core/classes/event.dart';
+import 'package:event_app/core/data/events.dart';
+import 'package:event_app/core/data/placeholders.dart';
 import 'package:event_app/core/viewmodels/search_model.dart';
 import 'package:event_app/ui/views/base_view.dart';
 import 'package:flutter/material.dart';
@@ -77,7 +80,7 @@ class SearchView extends StatelessWidget {
                               color: Theme.of(context).primaryColor)),
                       Expanded(
                         child: Text(
-                          '501 Broadway,\nNashville, TN 37203',
+                          '501 Broadway, Nashville, TN 37203',
                           style: stylingLocationText,
                           textAlign: TextAlign.start,
                         ),
@@ -95,10 +98,12 @@ class SearchView extends StatelessWidget {
                         width: MediaQuery.of(context).size.width / 1.15,
                         color: Colors.white,
                         child: TextField(
-                          onChanged: (value) {},
-                          // controller: Controller Goes Here,
+                          maxLines: 1,
+                          controller: model.controller,
+                          onChanged: (value) {
+                            model.changeText(value);
+                          },
                           autocorrect: true,
-                          
                           style: stylingInputText,
                           decoration: InputDecoration(
                             hintText: 'Enter city or name of event',
@@ -163,6 +168,9 @@ class SearchView extends StatelessWidget {
   }
 
   Widget _buildEventContainer(BuildContext context, SearchModel model) {
+    var string = model.controller.text;
+    filteredEventsFromSearch = events.where((event) => event.name.toLowerCase().contains(string.toLowerCase())).toList();
+
     return Container(
       height: double.infinity,
       color: Colors.white,
@@ -175,9 +183,9 @@ class SearchView extends StatelessWidget {
             child: ListView.builder(
               physics: ClampingScrollPhysics(),
               scrollDirection: Axis.horizontal,
-              itemCount: model.events.length,
+              itemCount: filteredEventsFromSearch.isNotEmpty ? filteredEventsFromSearch.length : events.length,
               itemBuilder: (BuildContext context, int index) {
-                return ContentCardView(event: model.events[index], onSearch: true,);
+                return ContentCardView(event: filteredEventsFromSearch.isNotEmpty ? filteredEventsFromSearch[index] : events[index], onSearch: true,);
               },
             ),
           ),
