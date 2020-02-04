@@ -6,6 +6,9 @@ import 'package:flutter_dash/flutter_dash.dart';
 
 import 'widget_views/content_card_view.dart';
 
+// Data
+import 'package:event_app/core/data/events.dart';
+
 class SearchView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -89,39 +92,37 @@ class SearchView extends StatelessWidget {
               Container(
                 height: MediaQuery.of(context).size.height / 9,
                 child: Padding(
-                  padding:
-                      const EdgeInsets.only(left: 24.0, top: 8.0, bottom: 32.0, right: 24.0),
+                  padding: const EdgeInsets.only(
+                      left: 24.0, top: 8.0, bottom: 32.0, right: 24.0),
                   child: Container(
-                        width: MediaQuery.of(context).size.width / 1.15,
-                        color: Colors.white,
-                        child: TextField(
-                          onChanged: (value) {},
-                          // controller: Controller Goes Here,
-                          autocorrect: true,
-                          
-                          style: stylingInputText,
-                          decoration: InputDecoration(
-                            hintText: 'Enter city or name of event',
-                            hintStyle: stylingInputHintText,
-                            prefixIcon: Icon(
-                              Icons.search,
-                              color: Theme.of(context).primaryColor,
-                              size: 28,
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Theme.of(context).primaryColor,
-                                  width: 0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Theme.of(context).primaryColor,
-                                  width: 0),
-                            ),
-                            border: InputBorder.none,
-                          ),
+                    width: MediaQuery.of(context).size.width / 1.15,
+                    color: Colors.white,
+                    child: TextField(
+                      onChanged: (value) {},
+                      // controller: Controller Goes Here,
+                      autocorrect: true,
+
+                      style: stylingInputText,
+                      decoration: InputDecoration(
+                        hintText: 'Enter city or name of event',
+                        hintStyle: stylingInputHintText,
+                        prefixIcon: Icon(
+                          Icons.search,
+                          color: Theme.of(context).primaryColor,
+                          size: 28,
                         ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Theme.of(context).primaryColor, width: 0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Theme.of(context).primaryColor, width: 0),
+                        ),
+                        border: InputBorder.none,
                       ),
+                    ),
+                  ),
                 ),
               ),
               Container(
@@ -177,21 +178,26 @@ class SearchView extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemCount: model.events.length,
               itemBuilder: (BuildContext context, int index) {
-                return ContentCardView(event: model.events[index], onSearch: true,);
+                return GestureDetector(
+                  onTap: () => Navigator.of(context).push(model.eventDetailsRoute(events[index])),
+                  child: ContentCardView(
+                    event: model.events[index],
+                    onSearch: true,
+                  ),
+                );
               },
             ),
           ),
           Container(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            color: Colors.white,
-            alignment: Alignment.center,
-            child: Dash(
-              dashColor: Theme.of(context).primaryColor,
-              dashGap: 10,
-              dashLength: 12,
-              length: MediaQuery.of(context).size.width - 50,
-            )
-          ),
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              color: Colors.white,
+              alignment: Alignment.center,
+              child: Dash(
+                dashColor: Theme.of(context).primaryColor,
+                dashGap: 10,
+                dashLength: 12,
+                length: MediaQuery.of(context).size.width - 50,
+              )),
           Container(
             color: Colors.white,
             padding: const EdgeInsets.symmetric(horizontal: 32.0),
