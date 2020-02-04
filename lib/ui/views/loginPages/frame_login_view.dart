@@ -100,9 +100,11 @@ class FrameLoginView extends StatelessWidget {
                               height: MediaQuery.of(context).size.height * 0.3,
                               padding: const EdgeInsets.all(32.0),
                               child: ListView.builder(
+                                reverse: true,
                                 scrollDirection: Axis.horizontal,
                                 itemCount: categories.length,
                                 itemBuilder: (BuildContext context, int index) {
+                                  categories.sort((a, b) => a.calculateCounter(events).compareTo(b.calculateCounter(events)));
                                   return ContentCategoryView(category: categories[index], callback: model.refreshUI);
                                 },   
                               ),

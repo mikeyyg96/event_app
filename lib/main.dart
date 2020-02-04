@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Geosans'
       ),
       home: FrameLoginView(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
