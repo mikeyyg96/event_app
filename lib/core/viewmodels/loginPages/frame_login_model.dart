@@ -64,6 +64,7 @@ class FrameLoginModel extends BaseModel {
   }
 
   Future<List<Event>> getEvents() async {
+    databaseEvents.clear();
     // Eventually a parameter would be the preferences to filter
     await databaseReference
         .collection("events")
@@ -80,23 +81,8 @@ class FrameLoginModel extends BaseModel {
           organization: f.data['organization'],
           price: f.data['price'],
         ));
-        //f.data.length;
-        //tempMap.addAll(f.data);
       });
     });
-    //print(tempMap.length);
-    // tempMap.forEach((field, value) {
-    //   databaseEvents.add(new Event(
-    //     category: tempMap['category'],
-    //     date: tempMap['date'].toString(),
-    //     description: tempMap['description'],
-    //     distance: tempMap['distance'],
-    //     image: 'assets/events/burger_food.jpg',
-    //     name: tempMap['name'],
-    //     organization: tempMap['organization'],
-    //     price: tempMap['price'],
-    //   ));
-    // });
     return databaseEvents;
   }
 

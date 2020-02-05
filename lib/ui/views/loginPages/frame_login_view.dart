@@ -13,7 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 // Data
-import 'package:event_app/core/data/events.dart';
 import 'package:event_app/core/data/categories.dart';
 
 class FrameLoginView extends StatelessWidget {
