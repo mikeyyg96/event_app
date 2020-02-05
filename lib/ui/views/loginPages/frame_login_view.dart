@@ -94,15 +94,11 @@ class FrameLoginView extends StatelessWidget {
                                     ? events.length
                                     : filteredEvents.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  return GestureDetector(
-                                    onTap: () => Navigator.of(context)
-                                          .push(model.eventDetailsRoute(events[index])),
-                                    child: ContentCardView(
+                                  return ContentCardView(
                                       event: filteredEvents.isEmpty
                                           ? events[index]
                                           : filteredEvents[index],
                                       onSearch: false,
-                                    ),
                                   );
                                 },
                               ),

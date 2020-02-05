@@ -128,7 +128,7 @@ class ContentCardView extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 width: 275,
                 child: GestureDetector(
-                  onTap: () => print('Read More'),
+                  onTap: () => Navigator.of(context).push(model.eventDetailsRoute(event)),
                   child: Text(
                     'Read More',
                     style: onSearch ? stylingActiveCardNumItalics : stylingInactiveCardNumItalics,
