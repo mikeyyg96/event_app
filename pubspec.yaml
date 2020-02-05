@@ -17,6 +17,10 @@ dependencies:
   flutter_dash: ^0.0.1
   flutter_range_slider: ^1.4.0
   flutter_date_pickers: ^0.0.6
+  firebase_core: ^0.4.3+3
+  firebase_auth: ^0.15.4
+  cloud_firestore: ^0.13.0+1
+  firebase_analytics: ^5.0.11
 
 dev_dependencies:
   flutter_test:

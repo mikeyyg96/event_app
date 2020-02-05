@@ -1,9 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:event_app/core/enums/viewstate.dart';
 import 'package:flutter_date_pickers/flutter_date_pickers.dart';
 
 import '../base_model.dart';
 
 class PreferencesModel extends BaseModel {
+
+  final databaseReference = Firestore.instance;
 
   bool _pressed = false;
 
@@ -62,5 +65,21 @@ class PreferencesModel extends BaseModel {
     notifyListeners();
 
     setState(ViewState.Idle);
+  }
+
+  void createRecord() async {
+    await databaseReference.collection("events")
+      .document("1")
+      .setData({
+        'title': 'Mastering Flutter',
+        'description': 'Programming Guide for Dart'
+      });
+
+  DocumentReference ref = await databaseReference.collection("books")
+      .add({
+        'title': 'Flutter in Action',
+        'description': 'Complete Programming Guide to learn Flutter'
+      });
+  print(ref.documentID);
   }
 }
