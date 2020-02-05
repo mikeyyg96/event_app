@@ -1,5 +1,5 @@
 import 'package:event_app/core/viewmodels/contentPages/preferences_model.dart';
-import 'package:event_app/core/viewmodels/widget_models/organization_card_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:event_app/ui/shared/styling.dart';
 import 'package:event_app/ui/views/base_view.dart';
 import 'package:event_app/ui/views/widget_views/organization_card_view.dart';
@@ -212,7 +212,10 @@ class PreferencesView extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(20.0)),
                     splashColor: Theme.of(context).primaryColor.withOpacity(0.2),
                     highlightColor: Colors.transparent,
-                    onTap: () => model.pressButton(),
+                    onTap: () {
+                      model.pressButton();
+                      model.createRecord();
+                    },
                     child: Container(
                       alignment: Alignment.center,
                       width: MediaQuery.of(context).size.width,

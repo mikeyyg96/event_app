@@ -1,20 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:event_app/core/classes/event.dart';
 import 'package:event_app/core/data/placeholders.dart';
 import 'package:event_app/core/enums/viewstate.dart';
 import 'package:event_app/core/viewmodels/base_model.dart';
 
-import 'package:event_app/ui/views/widget_views/content_card_view.dart';
-import 'package:event_app/ui/views/contentPages/event_details_view.dart';
-
 import 'package:flutter/material.dart';
 
-//* Import files for routes transitions
-import 'package:event_app/ui/views/search_view.dart';
-
-// Data
-import 'package:event_app/core/data/events.dart';
-
 class FrameLoginModel extends BaseModel {
+  final databaseReference = Firestore.instance;
 
   String _image = 'assets/background/town_background.jpg';
 
@@ -30,9 +23,9 @@ class FrameLoginModel extends BaseModel {
     setState(ViewState.Busy);
 
     filteredEvents.clear();
-    events.forEach((Event event) {
+    databaseEvents.forEach((Event event) {
       filters.forEach((String filter) {
-        if (filter == event.category) {
+        if (filter.toLowerCase() == event.category.toLowerCase()) {
           filteredEvents.add(event);
         }
       });
@@ -41,7 +34,6 @@ class FrameLoginModel extends BaseModel {
 
     setState(ViewState.Idle);
   }
-
 
   void animateDown() {
     setState(ViewState.Busy);
@@ -69,6 +61,29 @@ class FrameLoginModel extends BaseModel {
     notifyListeners();
 
     setState(ViewState.Idle);
+  }
+
+  Future<List<Event>> getEvents() async {
+    databaseEvents.clear();
+    // Eventually a parameter would be the preferences to filter
+    await databaseReference
+        .collection("events")
+        .getDocuments()
+        .then((QuerySnapshot snapshot) {
+      snapshot.documents.forEach((f) {
+        databaseEvents.add(new Event(
+          category: f.data['category'],
+          date: f.data['date'].toString(),
+          description: f.data['description'],
+          distance: f.data['distance'],
+          image: 'https://picsum.photos/seed/picsum/200/300',
+          name: f.data['name'],
+          organization: f.data['organization'],
+          price: f.data['price'],
+        ));
+      });
+    });
+    return databaseEvents;
   }
 
   //* Route transition functions

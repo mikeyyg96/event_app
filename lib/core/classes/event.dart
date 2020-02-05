@@ -1,7 +1,6 @@
 class Event {
-  final String name, description, category, image, organization;
-  final double price, distance;
-  final DateTime date;
+  final String name, description, category, image, organization, userID, price, distance, date;
+  //final DateTime date;
   // Soon will have a GeoPoint
 
   Event({
@@ -13,5 +12,6 @@ class Event {
     this.distance,
     this.price,
     this.date,
+    this.userID
   });
 }

@@ -28,7 +28,7 @@ class ContentCardView extends StatelessWidget {
                 width: 275,
                 child: Stack(
                   children: <Widget>[
-                    Image.asset(
+                    Image.network(
                       event.image,
                       fit: BoxFit.fill,
                       width: double.infinity,
@@ -51,7 +51,7 @@ class ContentCardView extends StatelessWidget {
                                       BorderRadius.all(Radius.circular(30.0)),
                                 ),
                                 child: Text(
-                                  event.distance.toStringAsFixed(2) + ' Mi',
+                                  '${event.distance}' + ' Mi',
                                   style: stylingInactiveCardNum,
                                   textAlign: TextAlign.center,
                                 ),
@@ -70,7 +70,7 @@ class ContentCardView extends StatelessWidget {
                                       BorderRadius.all(Radius.circular(30.0)),
                                 ),
                                 child: Text(
-                                  '\$' + event.price.toStringAsFixed(2),
+                                  '\$' + '${event.price}',
                                   style: stylingInactiveCardNum,
                                 ),
                               ),

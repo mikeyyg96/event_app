@@ -172,7 +172,7 @@ class SearchView extends StatelessWidget {
 
   Widget _buildEventContainer(BuildContext context, SearchModel model) {
     var string = model.controller.text;
-    filteredEventsFromSearch = events.where((event) => event.name.toLowerCase().contains(string.toLowerCase())).toList();
+    filteredEventsFromSearch = databaseEvents.where((event) => event.name.toLowerCase().contains(string.toLowerCase())).toList();
 
     return Container(
       height: double.infinity,
@@ -186,9 +186,9 @@ class SearchView extends StatelessWidget {
             child: ListView.builder(
               physics: ClampingScrollPhysics(),
               scrollDirection: Axis.horizontal,
-              itemCount: filteredEventsFromSearch.isNotEmpty ? filteredEventsFromSearch.length : events.length,
+              itemCount: filteredEventsFromSearch.isNotEmpty ? filteredEventsFromSearch.length : databaseEvents.length,
               itemBuilder: (BuildContext context, int index) {
-                return ContentCardView(event: filteredEventsFromSearch.isNotEmpty ? filteredEventsFromSearch[index] : events[index], onSearch: true,);
+                return ContentCardView(event: filteredEventsFromSearch.isNotEmpty ? filteredEventsFromSearch[index] : databaseEvents[index], onSearch: true,);
               },
             ),
           ),
