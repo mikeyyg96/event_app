@@ -15,7 +15,6 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:event_app/core/data/events.dart';
 import 'package:event_app/core/data/categories.dart';
 
-
 class FrameLoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -85,14 +84,26 @@ class FrameLoginView extends StatelessWidget {
                             Container(
                               height: MediaQuery.of(context).size.height * 0.5,
                               width: double.infinity,
-                              padding: const EdgeInsets.fromLTRB(32.0, 64.0, 0.0, 64.0),
+                              padding: const EdgeInsets.fromLTRB(
+                                  32.0, 64.0, 0.0, 64.0),
                               child: ListView.builder(
                                 shrinkWrap: true,
                                 physics: ClampingScrollPhysics(),
                                 scrollDirection: Axis.horizontal,
-                                itemCount: filteredEvents.isEmpty ? events.length : filteredEvents.length,
+                                itemCount: filteredEvents.isEmpty
+                                    ? events.length
+                                    : filteredEvents.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  return ContentCardView(event: filteredEvents.isEmpty ? events[index] : filteredEvents[index], onSearch: false,);
+                                  return GestureDetector(
+                                    onTap: () => Navigator.of(context)
+                                          .push(model.eventDetailsRoute(events[index])),
+                                    child: ContentCardView(
+                                      event: filteredEvents.isEmpty
+                                          ? events[index]
+                                          : filteredEvents[index],
+                                      onSearch: false,
+                                    ),
+                                  );
                                 },
                               ),
                             ),

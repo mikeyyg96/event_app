@@ -9,6 +9,9 @@ import 'package:flutter_dash/flutter_dash.dart';
 
 import 'widget_views/content_card_view.dart';
 
+// Data
+import 'package:event_app/core/data/events.dart';
+
 class SearchView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -92,8 +95,8 @@ class SearchView extends StatelessWidget {
               Container(
                 height: MediaQuery.of(context).size.height / 9,
                 child: Padding(
-                  padding:
-                      const EdgeInsets.only(left: 24.0, top: 8.0, bottom: 32.0, right: 24.0),
+                  padding: const EdgeInsets.only(
+                      left: 24.0, top: 8.0, bottom: 32.0, right: 24.0),
                   child: Container(
                         width: MediaQuery.of(context).size.width / 1.15,
                         color: Colors.white,
@@ -126,7 +129,14 @@ class SearchView extends StatelessWidget {
                             border: InputBorder.none,
                           ),
                         ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Theme.of(context).primaryColor, width: 0),
+                        ),
+                        border: InputBorder.none,
                       ),
+                    ),
+                  ),
                 ),
               ),
               Container(
@@ -190,16 +200,15 @@ class SearchView extends StatelessWidget {
             ),
           ),
           Container(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            color: Colors.white,
-            alignment: Alignment.center,
-            child: Dash(
-              dashColor: Theme.of(context).primaryColor,
-              dashGap: 10,
-              dashLength: 12,
-              length: MediaQuery.of(context).size.width - 50,
-            )
-          ),
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              color: Colors.white,
+              alignment: Alignment.center,
+              child: Dash(
+                dashColor: Theme.of(context).primaryColor,
+                dashGap: 10,
+                dashLength: 12,
+                length: MediaQuery.of(context).size.width - 50,
+              )),
           Container(
             color: Colors.white,
             padding: const EdgeInsets.symmetric(horizontal: 32.0),

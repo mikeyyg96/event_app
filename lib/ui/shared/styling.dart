@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+//* Text Styles
+
 final stylingActiveCard = const TextStyle(color: Colors.black54, fontSize: 22, fontWeight: FontWeight.bold);
 
 final stylingInactiveCard = const TextStyle(color: Colors.white, fontSize: 22);
@@ -21,3 +23,11 @@ final stylingInputText = const TextStyle(color: Colors.black, fontSize: 20.0);
 final stylingInputHintText = const TextStyle(color: Colors.black38, fontSize: 20.0, fontStyle: FontStyle.italic);
 
 final stylingLocationText = const TextStyle(color: Color(0xFFAF9164), fontSize: 16.0);
+
+final stylingLargeButton = const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0);
+
+//*Dividers
+
+final stylingGreyDivider = Divider(color: Colors.grey[200], indent: 24.0, endIndent: 24.0, thickness: 1.0);
+
+final stylingListDivider = Divider(color: Colors.grey[200], indent: 0.0, endIndent: 0.0, thickness: 1.0);
