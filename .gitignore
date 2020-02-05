@@ -39,3 +39,6 @@ lib/generated_plugin_registrant.dart
 # Firebase
 ios/Runner/GoogleService-Info.plist
 android/app/google-services.json
+android/key.properties
+android/app/key.jks
+android/app/key/key.jks
