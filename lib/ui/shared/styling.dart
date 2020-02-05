@@ -16,6 +16,8 @@ final stylingInactiveCardNumItalics = const TextStyle(color: Colors.white, fontS
 
 final stylingHeader = const TextStyle(fontSize: 28.0, color: Colors.black, fontWeight: FontWeight.bold);
 
+final stylingHeaderWhite = const TextStyle(fontSize: 28.0, color: Colors.white, fontWeight: FontWeight.bold);
+
 final stylingInputText = const TextStyle(color: Colors.black, fontSize: 20.0);
 
 final stylingInputHintText = const TextStyle(color: Colors.black38, fontSize: 20.0, fontStyle: FontStyle.italic);

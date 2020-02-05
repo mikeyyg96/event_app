@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:event_app/core/data/placeholders.dart';
 import 'package:event_app/core/viewmodels/loginPages/frame_login_model.dart';
 import 'package:event_app/ui/views/base_view.dart';
+import 'package:event_app/ui/views/contentPages/preferences_view.dart';
+import 'package:event_app/ui/views/search_view.dart';
 import 'package:event_app/ui/views/widget_views/content_card_view.dart';
 import 'package:event_app/ui/views/widget_views/content_category_view.dart';
 import 'package:flutter/material.dart';
@@ -64,14 +66,13 @@ class FrameLoginView extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     IconButton(
-                                      onPressed: () => Navigator.of(context)
-                                          .push(model.searchRoute()),
+                                      onPressed: () => Navigator.of(context).push(model.searchRoute(SearchView(), Offset(-1.0, 0.0))),
                                       icon: Icon(Icons.search),
                                       color: Colors.white.withOpacity(0.75),
                                       iconSize: 32,
                                     ),
                                     IconButton(
-                                      onPressed: () => model.animateUp(),
+                                      onPressed: () => Navigator.of(context).push(model.searchRoute(PreferencesView(), Offset(1.0, 0.0))),
                                       icon: Icon(Icons.tune),
                                       color: Colors.white.withOpacity(0.75),
                                       iconSize: 32,
@@ -110,13 +111,13 @@ class FrameLoginView extends StatelessWidget {
                               height: MediaQuery.of(context).size.height * 0.3,
                               padding: const EdgeInsets.all(32.0),
                               child: ListView.builder(
+                                reverse: true,
                                 scrollDirection: Axis.horizontal,
                                 itemCount: categories.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  return ContentCategoryView(
-                                      category: categories[index],
-                                      callback: model.refreshUI);
-                                },
+                                  categories.sort((a, b) => a.calculateCounter(events).compareTo(b.calculateCounter(events)));
+                                  return ContentCategoryView(category: categories[index], callback: model.refreshUI);
+                                },   
                               ),
                             )
                           ],
