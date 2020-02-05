@@ -40,9 +40,11 @@ class PreferencesView extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      OrganizationCardView(type: 'Non-Trusted', icon: Icons.person),
+                      OrganizationCardView(
+                          type: 'Member', icon: Icons.person),
                       OrganizationCardView(type: 'Verified', icon: Icons.star),
-                      OrganizationCardView(type: 'Sponsored', icon: Icons.local_atm),
+                      OrganizationCardView(
+                          type: 'Sponsored', icon: Icons.local_atm),
                     ],
                   ),
                 ),
@@ -148,7 +150,10 @@ class PreferencesView extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Text(model.endMiles == 100 ? '${model.endMiles.toStringAsFixed(0)} +' : '${model.endMiles.toStringAsFixed(0)}',
+                      Text(
+                          model.endMiles == 100
+                              ? '${model.endMiles.toStringAsFixed(0)} +'
+                              : '${model.endMiles.toStringAsFixed(0)}',
                           style: stylingActiveCardNum),
                     ],
                   ),
@@ -161,14 +166,20 @@ class PreferencesView extends StatelessWidget {
                   ),
                 ),
                 RangePicker(
-                  firstDate: model.period.start,
+                  firstDate: DateTime.now().subtract(Duration(days: 2)),
                   lastDate: DateTime.now().add(Duration(days: 365)),
                   selectedPeriod: model.period,
                   onChanged: (DatePeriod period) {
                     model.changeDate(period);
                   },
+                  onSelectionError: (UnselectablePeriodException exception) {
+                    model.changeDate(DatePeriod(
+                        DateTime.now(), DateTime.now().add(Duration(days: 2))));
+                    SnackBar(content: null);
+                  },
                   selectableDayPredicate: (DateTime date) {
-                    if (date.isBefore(model.period.start)) {
+                    if (date
+                        .isBefore(DateTime.now().subtract(Duration(days: 2)))) {
                       return false;
                     } else {
                       return true;
@@ -193,26 +204,20 @@ class PreferencesView extends StatelessWidget {
                             bottomRight: Radius.circular(30.0))),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: GestureDetector(
-                    onTap: () {},
+                Material(
+                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  elevation: model.pressed ? 0 : 12,
+                  color: Theme.of(context).accentColor,
+                  child: InkWell(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                    splashColor: Theme.of(context).primaryColor.withOpacity(0.2),
+                    highlightColor: Colors.transparent,
+                    onTap: () => model.pressButton(),
                     child: Container(
                       alignment: Alignment.center,
-                      height: 50,
                       width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                          color: Theme.of(context).accentColor,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey,
-                              blurRadius: 5.0,
-                            ),
-                          ]),
-                      child: Center(
-                        child: Text('Save Changes', style: stylingActiveCard),
-                      ),
+                      height: 75,
+                      child: model.pressed ? CircularProgressIndicator(backgroundColor: Colors.greenAccent) :  Text('Save Changes', style: stylingActiveCard),
                     ),
                   ),
                 ),

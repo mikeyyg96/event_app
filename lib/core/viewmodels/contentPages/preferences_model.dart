@@ -5,10 +5,14 @@ import '../base_model.dart';
 
 class PreferencesModel extends BaseModel {
 
+  bool _pressed = false;
+
   double _startPrice = 20.0, _endPrice = 60.0;
   double _startMiles = 20.0, _endMiles = 60.0;
 
   DatePeriod _period = DatePeriod(DateTime.now().subtract(Duration(days: 1)), DateTime.now().add(Duration(days: 1)));
+
+  bool get pressed => _pressed;
 
   double get startPrice => _startPrice;
   double get endPrice => _endPrice;
@@ -39,6 +43,22 @@ class PreferencesModel extends BaseModel {
   void changeDate(DatePeriod period) {
     setState(ViewState.Busy);
     _period = period;
+    notifyListeners();
+
+    setState(ViewState.Idle);
+  }
+
+  void pressButton() {
+    setState(ViewState.Busy);
+    _pressed = !_pressed;
+    notifyListeners();
+
+    setState(ViewState.Idle);
+  }
+
+  void notPressed() {
+    setState(ViewState.Busy);
+    _pressed = false;
     notifyListeners();
 
     setState(ViewState.Idle);
