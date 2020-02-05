@@ -14,47 +14,51 @@ class OrganizationCardView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseView<OrganizationCardModel>(
       builder: (context, model, child) => Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          onTap: () {
-                            if (model.active) {
-                              model.deactivate();
-                            } else {
-                              model.activate();
-                            }
-                          },
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20.0))),
-                            elevation: 12,
-                            child: Container(
-                              height: 80,
-                              width: 80,
-                              decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                  color: model.active ? Theme.of(context).primaryColor : Colors.white),
-                              child: Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Icon(
-                                      icon,
-                                      color: model.active ? Colors.white : Colors.black54,
-                                    ),
-                                    Text(
-                                      type,
-                                      style: model.active ? stylingInactiveCardNum : stylingActiveCardNum,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+        padding: const EdgeInsets.all(8.0),
+        child: GestureDetector(
+          onTap: () {
+            if (model.active) {
+              model.deactivate();
+            } else {
+              model.activate();
+            }
+          },
+          child: Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(20.0),
+              ),
+            ),
+            elevation: 12,
+            child: Container(
+              height: 80,
+              width: 80,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  color: model.active
+                      ? Theme.of(context).primaryColor.withOpacity(0.8)
+                      : Colors.white),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(
+                      icon,
+                      color: model.active ? Colors.white : Colors.black54,
+                    ),
+                    Text(
+                      type,
+                      style: model.active
+                          ? stylingInactiveCardNum
+                          : stylingActiveCardNum,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
-  
 }
