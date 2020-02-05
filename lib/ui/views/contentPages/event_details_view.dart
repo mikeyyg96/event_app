@@ -6,11 +6,9 @@ import 'package:event_app/ui/shared/styling.dart';
 import '../base_view.dart';
 
 class EventDetailsView extends StatelessWidget {
-  // Temporary
-  EventDetailsView({@required this.event, this.tag, this.img});
+  //* Require the event data
+  EventDetailsView({@required this.event});
 
-  final String tag;
-  final String img;
   final Event event;
 
   @override
@@ -125,38 +123,172 @@ class EventDetailsView extends StatelessWidget {
                     //     ],
                     //   ),
                     // ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            'Event Info',
-                            style: TextStyle(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black),
-                          ),
-                        ],
+                    stylingGreyDivider,
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(
+                    //       horizontal: 24.0, vertical: 16.0),
+                    //   child: Row(
+                    //     crossAxisAlignment: CrossAxisAlignment.start,
+                    //     mainAxisAlignment: MainAxisAlignment.start,
+                    //     children: <Widget>[
+                    //       Text(
+                    //         'Event Info',
+                    //         style: TextStyle(
+                    //             fontSize: 20.0,
+                    //             fontWeight: FontWeight.bold,
+                    //             color: Colors.black),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+                    Expanded(
+                      child: Container(
+                        child: ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          itemCount: 1,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 8.0),
+                                    child: Text(
+                                      'Event Info',
+                                      style: TextStyle(
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    ),
+                                  ),
+                                  stylingListDivider,
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 8.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Text('Name'),
+                                        Text(event.name),
+                                      ],
+                                    ),
+                                  ),
+                                  stylingListDivider,
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 8.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Text('Price'),
+                                        Text(event.price.toString()),
+                                      ],
+                                    ),
+                                  ),
+                                  stylingListDivider,
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 8.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Text('Category'),
+                                        Text(event.category),
+                                      ],
+                                    ),
+                                  ),
+                                  stylingListDivider,
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 8.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Text('Date'),
+                                        Text(event.date.toString()),
+                                      ],
+                                    ),
+                                  ),
+                                  stylingListDivider,
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 8.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Text('Distance'),
+                                        Text(event.distance.toString()),
+                                      ],
+                                    ),
+                                  ),
+                                  stylingListDivider,
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 8.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Text('organization'),
+                                        Text(event.organization),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 8.0),
+                                    child: Text(
+                                      'Description',
+                                      style: TextStyle(
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 8.0),
+                                    child: Text(event.description),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
                       ),
                     ),
-                    Expanded(
-                      child: Container(color: Colors.red,),
-                    ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 24.0, vertical: 16.0),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          RaisedButton(
-                            onPressed: () => print('test'),
-                            child: Text('Test'),
+                          Container(
+                            height: MediaQuery.of(context).size.height / 16,
+                            width: MediaQuery.of(context).size.width / 3,
+                            child: RaisedButton(
+                              onPressed: () => print('Going'),
+                              color: Theme.of(context).primaryColor,
+                              textColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
+                                side: BorderSide(
+                                    color: Theme.of(context).primaryColor),
+                              ),
+                              child: Text('Going', style: stylingLargeButton),
+                            ),
                           ),
-                          RaisedButton(
-                            onPressed: () => print('test'),
-                            child: Text('Test'),
+                          Container(
+                            height: MediaQuery.of(context).size.height / 16,
+                            width: MediaQuery.of(context).size.width / 3,
+                            child: RaisedButton(
+                              onPressed: () => print('Maybe'),
+                              color: Colors.white,
+                              textColor: Theme.of(context).primaryColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
+                                side: BorderSide(
+                                    color: Theme.of(context).primaryColor),
+                              ),
+                              child: Text(
+                                'Maybe',
+                                style: stylingLargeButton,
+                              ),
+                            ),
                           ),
                         ],
                       ),
