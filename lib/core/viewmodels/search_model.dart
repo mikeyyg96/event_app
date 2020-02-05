@@ -83,6 +83,16 @@ class SearchModel extends BaseModel {
     setState(ViewState.Idle);
   }
 
+  void changeText(String value) {
+
+    setState(ViewState.Busy);
+
+    _controller.value = _controller.value.copyWith(text: value);
+    notifyListeners();
+
+    setState(ViewState.Idle);
+  }
+
 
     Route eventDetailsRoute(event) {
     return PageRouteBuilder(
@@ -102,18 +112,6 @@ class SearchModel extends BaseModel {
         );
       },
     );
-  }
-
-}
-  
-  void changeText(String value) {
-
-    setState(ViewState.Busy);
-
-    _controller.value = _controller.value.copyWith(text: value);
-    notifyListeners();
-
-    setState(ViewState.Idle);
-  }
-}
+    }
+    }
 

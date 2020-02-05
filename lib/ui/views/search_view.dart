@@ -129,16 +129,9 @@ class SearchView extends StatelessWidget {
                             border: InputBorder.none,
                           ),
                         ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor, width: 0),
-                        ),
-                        border: InputBorder.none,
                       ),
                     ),
                   ),
-                ),
-              ),
               Container(
                 height: MediaQuery.of(context).size.height * 0.6,
                 child: Container(
