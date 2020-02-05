@@ -18,13 +18,11 @@ class EventDetailsView extends StatelessWidget {
         body: Column(
           children: <Widget>[
             Container(
+              color: Colors.white,
               height: MediaQuery.of(context).size.height / 2.9,
               child: Stack(
                 children: <Widget>[
-                  Hero(
-                    tag: event.category,
-                    child: Image.asset(event.image),
-                  ),
+                  Image.network(event.image),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 8.0, vertical: 24.0),
@@ -69,6 +67,7 @@ class EventDetailsView extends StatelessWidget {
                       child: Container(
                         decoration: BoxDecoration(
                           color: Colors.white70,
+
                           shape: BoxShape.rectangle,
                           borderRadius: BorderRadius.all(
                             Radius.circular(8.0),
