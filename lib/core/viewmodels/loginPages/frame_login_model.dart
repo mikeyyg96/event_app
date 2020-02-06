@@ -6,23 +6,27 @@ import 'package:event_app/core/viewmodels/base_model.dart';
 import 'package:event_app/core/viewmodels/widget_models/content_card_model.dart';
 
 import 'package:flutter/material.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class FrameLoginModel extends BaseModel {
-  ContentCardModel _cardModel = new ContentCardModel();
-
   final databaseReference = Firestore.instance;
+
+  TextEditingController _controller = new TextEditingController();
+  MaskTextInputFormatter _maskTextInputFormatter = new MaskTextInputFormatter(mask: '(###) ###-####', filter: { "#": RegExp(r'[0-9]') });
 
   String _image = 'assets/background/town_background.jpg';
 
-  ContentCardModel get cardModel => _cardModel;
-
   bool _pressed = false;
   bool _isTransitioned = false;
+
+  TextEditingController get controller => _controller;
+  MaskTextInputFormatter get maskTextInputFormatter => _maskTextInputFormatter;
 
   String get image => _image;
 
   bool get pressed => _pressed;
   bool get isTransitioned => _isTransitioned;
+
 
   void animateDown() {
     setState(ViewState.Busy);
