@@ -4,15 +4,19 @@ import 'package:event_app/core/data/placeholders.dart';
 import 'package:event_app/core/enums/viewstate.dart';
 import 'package:event_app/core/viewmodels/base_model.dart';
 import 'package:event_app/core/viewmodels/widget_models/content_card_model.dart';
+import 'package:event_app/ui/shared/styling.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class FrameLoginModel extends BaseModel {
   final databaseReference = Firestore.instance;
+  String _smsCode = '';
+  String _verificationID = '';
 
   TextEditingController _controller = new TextEditingController();
-  MaskTextInputFormatter _maskTextInputFormatter = new MaskTextInputFormatter(mask: '(###) ###-####', filter: { "#": RegExp(r'[0-9]') });
+  MaskTextInputFormatter _maskTextInputFormatter = new MaskTextInputFormatter(mask: '+# ###-###-####', filter: { "#": RegExp(r'[0-9]') });
 
   String _image = 'assets/background/town_background.jpg';
 
@@ -27,6 +31,75 @@ class FrameLoginModel extends BaseModel {
   bool get pressed => _pressed;
   bool get isTransitioned => _isTransitioned;
 
+  Future<void> verifyNumber(BuildContext context) async {
+    final PhoneCodeAutoRetrievalTimeout autoRetrievalTimeout = (String verificationID) {
+      _verificationID = verificationID;
+      smsCodeDialog(context);
+    };
+
+    final PhoneVerificationCompleted verificationCompleted = (AuthCredential credential) {
+      print('Verified');
+      smsCodeDialog(context);
+    };
+    final PhoneCodeSent smsCodeSent=(String verID,[int forceCodeResend]){
+      _verificationID = verID;
+    };
+
+    final PhoneVerificationFailed verificationFailed = (AuthException exception) {
+      print('${exception.message}');
+    };
+
+    await FirebaseAuth.instance.verifyPhoneNumber(
+      phoneNumber: '+' + _maskTextInputFormatter.getUnmaskedText(),
+      codeAutoRetrievalTimeout: autoRetrievalTimeout,
+      codeSent: smsCodeSent,
+      timeout: const Duration(seconds: 5),
+      verificationCompleted: verificationCompleted,
+      verificationFailed: verificationFailed
+
+    );    
+  }
+
+  Future<bool> smsCodeDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) => AlertDialog(
+        title: Text('Enter SMS Code', style: stylingActiveCard,),
+        content: TextField(
+          onChanged: (value) {
+            _smsCode = value;
+          },
+        ),
+        actions: <Widget>[
+          FlatButton(
+            onPressed: () {
+              FirebaseAuth.instance.currentUser().then((userID) {
+                if (userID != null) {
+                  Navigator.pop(context);
+                  animateDown();
+                } else {
+                  Navigator.pop(context);
+                  signIn();
+                }
+              });
+            },
+            child: Text('Submit'),
+          )
+        ],
+      )
+    );
+  }
+
+  signIn() async {
+    final AuthCredential credential= PhoneAuthProvider.getCredential(
+      verificationId: _verificationID,
+      smsCode: _smsCode,
+    );
+    await FirebaseAuth.instance.signInWithCredential(credential).then((user){
+      animateDown();
+    }).catchError((e)=>print(e));
+  }
 
   void animateDown() {
     setState(ViewState.Busy);

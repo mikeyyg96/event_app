@@ -174,7 +174,7 @@ class FrameLoginView extends StatelessWidget {
                         child: TextField(
                           onEditingComplete: () {
                             FocusScope.of(context).requestFocus(FocusNode());
-                            model.animateDown();
+                            model.verifyNumber(context);
                           },
                           autocorrect: false,
                           cursorColor: Colors.black38,
