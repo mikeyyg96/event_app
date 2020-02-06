@@ -67,7 +67,6 @@ class EventDetailsView extends StatelessWidget {
                       child: Container(
                         decoration: BoxDecoration(
                           color: Colors.white70,
-
                           shape: BoxShape.rectangle,
                           borderRadius: BorderRadius.all(
                             Radius.circular(8.0),
@@ -147,7 +146,8 @@ class EventDetailsView extends StatelessWidget {
                           itemCount: 1,
                           itemBuilder: (context, index) {
                             return Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 24.0),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -166,7 +166,8 @@ class EventDetailsView extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.only(bottom: 8.0),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
                                         Text('Name'),
                                         Text(event.name),
@@ -177,7 +178,8 @@ class EventDetailsView extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.only(bottom: 8.0),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
                                         Text('Price'),
                                         Text(event.price.toString()),
@@ -188,7 +190,8 @@ class EventDetailsView extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.only(bottom: 8.0),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
                                         Text('Category'),
                                         Text(event.category),
@@ -199,7 +202,8 @@ class EventDetailsView extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.only(bottom: 8.0),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
                                         Text('Date'),
                                         Text(event.date.toString()),
@@ -210,7 +214,8 @@ class EventDetailsView extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.only(bottom: 8.0),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
                                         Text('Distance'),
                                         Text(event.distance.toString()),
@@ -221,7 +226,8 @@ class EventDetailsView extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.only(bottom: 8.0),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
                                         Text('organization'),
                                         Text(event.organization),

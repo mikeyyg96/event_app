@@ -4,8 +4,7 @@ import 'package:event_app/core/viewmodels/base_model.dart';
 import 'package:event_app/ui/views/contentPages/event_details_view.dart';
 import 'package:flutter/material.dart';
 
-class SearchModel extends BaseModel {  
-
+class SearchModel extends BaseModel {
   List<Widget> _people = [
     Padding(
       padding: const EdgeInsets.all(8.0),
@@ -84,7 +83,6 @@ class SearchModel extends BaseModel {
   }
 
   void changeText(String value) {
-
     setState(ViewState.Busy);
 
     _controller.value = _controller.value.copyWith(text: value);
@@ -93,10 +91,10 @@ class SearchModel extends BaseModel {
     setState(ViewState.Idle);
   }
 
-
-    Route eventDetailsRoute(event) {
+  Route eventDetailsRoute(event) {
     return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => EventDetailsView(event: event),
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          EventDetailsView(event: event),
       transitionDuration: const Duration(milliseconds: 1000),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         var begin = Offset(0.0, 1.0);
@@ -112,6 +110,5 @@ class SearchModel extends BaseModel {
         );
       },
     );
-    }
-    }
-
+  }
+}
