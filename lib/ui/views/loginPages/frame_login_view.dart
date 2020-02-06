@@ -90,51 +90,12 @@ class FrameLoginView extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  Container(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.5,
-                                    width: double.infinity,
-                                    padding: const EdgeInsets.fromLTRB(
-                                        32.0, 64.0, 0.0, 64.0),
-                                    child: ListView.builder(
-                                      shrinkWrap: true,
-                                      physics: ClampingScrollPhysics(),
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: filteredEvents.isEmpty
-                                          ? databaseEvents.length
-                                          : filteredEvents.length,
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                        return ContentCardView(
-                                          event: filteredEvents.isEmpty
-                                              ? databaseEvents[index]
-                                              : filteredEvents[index],
-                                          onSearch: false,
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                  Container(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.3,
-                                    padding: const EdgeInsets.all(32.0),
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: categories.length,
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                        categories.sort((a, b) => a
-                                            .calculateCounter(databaseEvents)
-                                            .compareTo(
-                                                b.calculateCounter(databaseEvents)));
-                                        categories =
-                                            categories.reversed.toList();
-                                        return ContentCategoryView(
-                                            category: categories[index],
-                                            callback: model.refreshUI);
-                                      },
-                                    ),
-                                  ),
+                                  ContentCardView(
+                                      event: filteredEvents.isEmpty
+                                          ? databaseEvents
+                                          : filteredEvents,
+                                      onSearch: false,
+                                      categories: categories),
                                 ],
                               ),
                             ),

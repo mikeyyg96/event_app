@@ -3,13 +3,18 @@ import 'package:event_app/core/classes/event.dart';
 import 'package:event_app/core/data/placeholders.dart';
 import 'package:event_app/core/enums/viewstate.dart';
 import 'package:event_app/core/viewmodels/base_model.dart';
+import 'package:event_app/core/viewmodels/widget_models/content_card_model.dart';
 
 import 'package:flutter/material.dart';
 
 class FrameLoginModel extends BaseModel {
+  ContentCardModel _cardModel = new ContentCardModel();
+
   final databaseReference = Firestore.instance;
 
   String _image = 'assets/background/town_background.jpg';
+
+  ContentCardModel get cardModel => _cardModel;
 
   bool _pressed = false;
   bool _isTransitioned = false;
@@ -18,22 +23,6 @@ class FrameLoginModel extends BaseModel {
 
   bool get pressed => _pressed;
   bool get isTransitioned => _isTransitioned;
-
-  void refreshUI() {
-    setState(ViewState.Busy);
-
-    filteredEvents.clear();
-    databaseEvents.forEach((Event event) {
-      filters.forEach((String filter) {
-        if (filter.toLowerCase() == event.category.toLowerCase()) {
-          filteredEvents.add(event);
-        }
-      });
-    });
-    notifyListeners();
-
-    setState(ViewState.Idle);
-  }
 
   void animateDown() {
     setState(ViewState.Busy);

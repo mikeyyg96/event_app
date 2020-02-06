@@ -98,40 +98,38 @@ class SearchView extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 24.0, top: 8.0, bottom: 32.0, right: 24.0),
                   child: Container(
-                        width: MediaQuery.of(context).size.width / 1.15,
-                        color: Colors.white,
-                        child: TextField(
-                          maxLines: 1,
-                          controller: model.controller,
-                          onChanged: (value) {
-                            model.changeText(value);
-                          },
-                          autocorrect: true,
-                          style: stylingInputText,
-                          decoration: InputDecoration(
-                            hintText: 'Enter city or name of event',
-                            hintStyle: stylingInputHintText,
-                            prefixIcon: Icon(
-                              Icons.search,
-                              color: Theme.of(context).primaryColor,
-                              size: 28,
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Theme.of(context).primaryColor,
-                                  width: 0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Theme.of(context).primaryColor,
-                                  width: 0),
-                            ),
-                            border: InputBorder.none,
-                          ),
+                    width: MediaQuery.of(context).size.width / 1.15,
+                    color: Colors.white,
+                    child: TextField(
+                      maxLines: 1,
+                      controller: model.controller,
+                      onChanged: (value) {
+                        model.changeText(value);
+                      },
+                      autocorrect: true,
+                      style: stylingInputText,
+                      decoration: InputDecoration(
+                        hintText: 'Enter city or name of event',
+                        hintStyle: stylingInputHintText,
+                        prefixIcon: Icon(
+                          Icons.search,
+                          color: Theme.of(context).primaryColor,
+                          size: 28,
                         ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Theme.of(context).primaryColor, width: 0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Theme.of(context).primaryColor, width: 0),
+                        ),
+                        border: InputBorder.none,
                       ),
                     ),
                   ),
+                ),
+              ),
               Container(
                 height: MediaQuery.of(context).size.height * 0.6,
                 child: Container(
@@ -172,28 +170,26 @@ class SearchView extends StatelessWidget {
 
   Widget _buildEventContainer(BuildContext context, SearchModel model) {
     var string = model.controller.text;
-    filteredEventsFromSearch = databaseEvents.where((event) => event.name.toLowerCase().contains(string.toLowerCase())).toList();
+    filteredEventsFromSearch = databaseEvents
+        .where(
+            (event) => event.name.toLowerCase().contains(string.toLowerCase()))
+        .toList();
 
     return Container(
       height: double.infinity,
       color: Colors.white,
-      padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 32),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Container(
-            height: MediaQuery.of(context).size.height / 3,
-            child: ListView.builder(
-              physics: ClampingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              itemCount: filteredEventsFromSearch.isNotEmpty ? filteredEventsFromSearch.length : databaseEvents.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ContentCardView(event: filteredEventsFromSearch.isNotEmpty ? filteredEventsFromSearch[index] : databaseEvents[index], onSearch: true,);
-              },
-            ),
+          ContentCardView(
+            event: filteredEventsFromSearch.isNotEmpty
+                ? filteredEventsFromSearch
+                : databaseEvents,
+            onSearch: true,
           ),
           Container(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              padding: const EdgeInsets.symmetric(vertical: 0.0),
               color: Colors.white,
               alignment: Alignment.center,
               child: Dash(
