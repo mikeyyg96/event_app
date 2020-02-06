@@ -19,10 +19,14 @@ class EventDetailsView extends StatelessWidget {
           children: <Widget>[
             Container(
               color: Colors.white,
-              height: MediaQuery.of(context).size.height / 2.9,
+              height: MediaQuery.of(context).size.height / 3,
               child: Stack(
                 children: <Widget>[
-                  Image.network(event.image),
+                  Image.network(
+                    event.image,
+                    width: MediaQuery.of(context).size.width,
+                    fit: BoxFit.fill,
+                    ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 8.0, vertical: 24.0),
