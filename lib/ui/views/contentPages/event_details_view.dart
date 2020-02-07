@@ -1,7 +1,10 @@
 import 'package:event_app/core/viewmodels/contentPages/event_details_model.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:event_app/core/classes/event.dart';
 import 'package:event_app/ui/shared/styling.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../base_view.dart';
 
@@ -18,14 +21,17 @@ class EventDetailsView extends StatelessWidget {
         body: Column(
           children: <Widget>[
             Container(
-              color: Colors.white,
-              height: MediaQuery.of(context).size.height / 2.9,
+              height: 300,
               child: Stack(
                 children: <Widget>[
-                  Image.network(event.image),
+                  Image.network(
+                    event.image,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 24.0),
+                        vertical: 32.0, horizontal: 8.0),
                     child: Align(
                       alignment: Alignment.topLeft,
                       child: IconButton(
@@ -43,7 +49,7 @@ class EventDetailsView extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 24.0),
+                        vertical: 32.0, horizontal: 8.0),
                     child: Align(
                       alignment: Alignment.topRight,
                       child: IconButton(
@@ -60,25 +66,28 @@ class EventDetailsView extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20.0, vertical: 24.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Align(
                       alignment: Alignment.bottomRight,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white70,
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(8.0),
+                      child: Wrap(
+                        children: <Widget>[
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white70,
+                              shape: BoxShape.rectangle,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(8.0),
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                '\$${event.price.toString()}',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ),
                           ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            '\$${event.price.toString()}',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
+                        ],
                       ),
                     ),
                   ),
@@ -86,220 +95,172 @@ class EventDetailsView extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Container(
-                color: Colors.white,
-                child: Column(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            event.name,
-                            style: stylingHeader,
-                          ),
-                        ],
-                      ),
-                    ),
-                    // Padding(
-                    //   padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    //   child: Row(
-                    //     crossAxisAlignment: CrossAxisAlignment.start,
-                    //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //     children: <Widget>[
-                    //       Text('10'),
-                    //       Container(
-                    //         width: 1,
-                    //         height: MediaQuery.of(context).size.height / 48,
-                    //         color: Colors.grey,
-                    //         child: VerticalDivider(),
-                    //       ),
-                    //       Text('10'),
-                    //       Text('10'),
-                    //     ],
-                    //   ),
-                    // ),
-                    stylingGreyDivider,
-                    // Padding(
-                    //   padding: const EdgeInsets.symmetric(
-                    //       horizontal: 24.0, vertical: 16.0),
-                    //   child: Row(
-                    //     crossAxisAlignment: CrossAxisAlignment.start,
-                    //     mainAxisAlignment: MainAxisAlignment.start,
-                    //     children: <Widget>[
-                    //       Text(
-                    //         'Event Info',
-                    //         style: TextStyle(
-                    //             fontSize: 20.0,
-                    //             fontWeight: FontWeight.bold,
-                    //             color: Colors.black),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
-                    Expanded(
-                      child: Container(
-                        child: ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          itemCount: 1,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 24.0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 8.0),
-                                    child: Text(
-                                      'Event Info',
-                                      style: TextStyle(
-                                          fontSize: 20.0,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black),
-                                    ),
-                                  ),
-                                  stylingListDivider,
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 8.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: <Widget>[
-                                        Text('Name'),
-                                        Text(event.name),
-                                      ],
-                                    ),
-                                  ),
-                                  stylingListDivider,
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 8.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: <Widget>[
-                                        Text('Price'),
-                                        Text(event.price.toString()),
-                                      ],
-                                    ),
-                                  ),
-                                  stylingListDivider,
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 8.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: <Widget>[
-                                        Text('Category'),
-                                        Text(event.category),
-                                      ],
-                                    ),
-                                  ),
-                                  stylingListDivider,
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 8.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: <Widget>[
-                                        Text('Date'),
-                                        Text(event.date.toString()),
-                                      ],
-                                    ),
-                                  ),
-                                  stylingListDivider,
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 8.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: <Widget>[
-                                        Text('Distance'),
-                                        Text(event.distance.toString()),
-                                      ],
-                                    ),
-                                  ),
-                                  stylingListDivider,
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 8.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: <Widget>[
-                                        Text('organization'),
-                                        Text(event.organization),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 8.0),
-                                    child: Text(
-                                      'Description',
-                                      style: TextStyle(
-                                          fontSize: 20.0,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 8.0),
-                                    child: Text(event.description),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 24.0, vertical: 16.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          Container(
-                            height: MediaQuery.of(context).size.height / 16,
-                            width: MediaQuery.of(context).size.width / 3,
-                            child: RaisedButton(
-                              onPressed: () => print('Going'),
-                              color: Theme.of(context).primaryColor,
-                              textColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                                side: BorderSide(
-                                    color: Theme.of(context).primaryColor),
-                              ),
-                              child: Text('Going', style: stylingLargeButton),
+              child: Stack(
+                children: <Widget>[
+                  SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Text(
+                            'Event Info',
+                            style: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
                             ),
                           ),
-                          Container(
-                            height: MediaQuery.of(context).size.height / 16,
-                            width: MediaQuery.of(context).size.width / 3,
-                            child: RaisedButton(
-                              onPressed: () => print('Maybe'),
-                              color: Colors.white,
-                              textColor: Theme.of(context).primaryColor,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                                side: BorderSide(
-                                    color: Theme.of(context).primaryColor),
+                        ),
+                        stylingListDivider,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text('Price'),
+                              Text(event.price.toString()),
+                            ],
+                          ),
+                        ),
+                        stylingListDivider,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text('Category'),
+                              Text(event.category),
+                            ],
+                          ),
+                        ),
+                        stylingListDivider,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text('Date'),
+                              Text(DateTime.fromMicrosecondsSinceEpoch(event.date.microsecondsSinceEpoch).toString()),
+                            ],
+                          ),
+                        ),
+                        stylingListDivider,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text('Distance'),
+                              Text(event.distance),
+                            ],
+                          ),
+                        ),
+                        stylingListDivider,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text('Organization'),
+                              Text(event.organization),
+                            ],
+                          ),
+                        ),
+                        stylingListDivider,
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Text(
+                            'Description',
+                            style: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Text(event.description),
+                        ),
+                        Container(
+                          height: 400,
+                          width: double.infinity,
+                          padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 128.0),
+                          child: GoogleMap(
+                            gestureRecognizers:
+                                <Factory<OneSequenceGestureRecognizer>>[
+                              new Factory<OneSequenceGestureRecognizer>(
+                                () => new EagerGestureRecognizer(),
                               ),
+                            ].toSet(),
+                            scrollGesturesEnabled: true,
+                            initialCameraPosition: CameraPosition(
+                                target: LatLng(27.2, 77.5), zoom: 14),
+                            onMapCreated: (controller) {
+                              model.googleMapController.complete(controller);
+                            },
+                            mapToolbarEnabled: true,
+                            mapType: MapType.hybrid,
+                            compassEnabled: true,
+                            minMaxZoomPreference: MinMaxZoomPreference(12, 15),
+                            myLocationButtonEnabled: true,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(bottom: 16.0),
+                    alignment: Alignment.bottomCenter,
+                    height: double.infinity,
+                    width: double.infinity,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        GestureDetector(
+                          onTap: () => print('hello world'),
+                          child: Container(
+                              padding: const EdgeInsets.all(8.0),
+                              height: 70,
+                              width: 120,
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).primaryColor,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(30.0),
+                                ),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'Going',
+                                  style: stylingInactiveCardNum,
+                                ),
+                              )),
+                        ),
+                        GestureDetector(
+                          onTap: () => print('hello world'),
+                          child: Container(
+                            padding: const EdgeInsets.all(8.0),
+                            height: 70,
+                            width: 120,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(30.0),
+                                ),
+                                border: Border.all(
+                                    color: Theme.of(context).primaryColor)),
+                            child: Center(
                               child: Text(
                                 'Maybe',
-                                style: stylingLargeButton,
+                                style: stylingLocationText,
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ],

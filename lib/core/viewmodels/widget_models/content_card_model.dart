@@ -44,7 +44,7 @@ class ContentCardModel extends BaseModel {
     setState(ViewState.Idle);
   }
 
-  Route eventDetailsRoute(event) {
+  Route eventDetailsRoute(Event event) {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) =>
           EventDetailsView(event: event),
