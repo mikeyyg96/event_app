@@ -1,7 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Event {
-  final String name, description, category, image, organization;
-  final double price, distance;
-  final DateTime date;
+  final String name, description, category, image, organization, userID, price, distance;
+  final Timestamp date;
   // Soon will have a GeoPoint
 
   Event({
@@ -13,5 +14,6 @@ class Event {
     this.distance,
     this.price,
     this.date,
+    this.userID
   });
 }

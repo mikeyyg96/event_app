@@ -1,9 +1,9 @@
 import 'package:event_app/core/classes/category.dart';
-import 'package:event_app/core/data/events.dart';
 import 'package:event_app/core/viewmodels/widget_models/content_category_model.dart';
 import 'package:event_app/ui/shared/styling.dart';
 import 'package:event_app/ui/views/base_view.dart';
 import 'package:flutter/material.dart';
+import 'package:event_app/core/data/placeholders.dart';
 
 class ContentCategoryView extends StatelessWidget {
 
@@ -46,7 +46,7 @@ class ContentCategoryView extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '${category.calculateCounter(events)}x',
+                  '${category.calculateCounter(databaseEvents)}x',
                   style: model.active ? stylingActiveCardNum : stylingInactiveCardNum,
                 ),
               ],

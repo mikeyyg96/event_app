@@ -1,4 +1,4 @@
-package com.gallreeves.events
+package com.maginate.events
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity
