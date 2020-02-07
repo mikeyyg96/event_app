@@ -44,3 +44,4 @@ android/app/key.jks
 android/app/key/key.jks
 ios/Runner/AppDelegate.swift
 android/app/src/main/AndroidManifest.xml
+android/app/src/main/AndroidManifest.xml
