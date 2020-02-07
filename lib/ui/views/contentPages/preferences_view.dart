@@ -214,7 +214,7 @@ class PreferencesView extends StatelessWidget {
                     highlightColor: Colors.transparent,
                     onTap: () {
                       model.pressButton();
-                      model.createRecord();
+                      //model.createRecord();
                     },
                     child: Container(
                       alignment: Alignment.center,

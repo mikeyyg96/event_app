@@ -1,7 +1,7 @@
 name: event_app
 description: A new Flutter project.
 
-version: 1.0.0+2
+version: 1.0.0+3
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -21,6 +21,9 @@ dependencies:
   firebase_auth: ^0.15.4
   cloud_firestore: ^0.13.0+1
   firebase_analytics: ^5.0.11
+  firebase_storage: ^3.1.1
+  mask_text_input_formatter: ^1.0.6
+  google_maps_flutter: ^0.5.22+1
 
 dev_dependencies:
   flutter_test:
@@ -35,6 +38,7 @@ flutter:
     - assets/background/
     - assets/events/
     - assets/people/
+    - assets/icon/
 
 
   fonts:
