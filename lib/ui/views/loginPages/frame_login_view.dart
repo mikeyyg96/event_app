@@ -144,12 +144,12 @@ class FrameLoginView extends StatelessWidget {
                 ),
                 Positioned(
                   top: MediaQuery.of(context).size.height / 2.15,
-                  left: MediaQuery.of(context).size.width / 5,
+                  left: model.errorText == null ? MediaQuery.of(context).size.width / 5 : MediaQuery.of(context).size.width / 4,
                   child: Material(
                     color: Colors.transparent,
                     child: Text(
-                      'Sign in with your phone number',
-                      style: stylingActiveCard,
+                      model.errorText == null ? 'Sign in with your phone number' : model.errorText,
+                      style: model.errorText == null ? stylingActiveCard : TextStyle(color: Colors.red, fontSize: 16.0),
                     ),
                   ),
                 ),
@@ -167,7 +167,8 @@ class FrameLoginView extends StatelessWidget {
                       padding: const EdgeInsets.all(16.0),
                       width: MediaQuery.of(context).size.width / 1.3,
                       decoration: BoxDecoration(
-                          border: Border.all(color: Theme.of(context).primaryColor),
+                          border:
+                              Border.all(color: Theme.of(context).primaryColor),
                           borderRadius:
                               BorderRadius.all(Radius.circular(20.0))),
                       child: Center(
@@ -190,7 +191,10 @@ class FrameLoginView extends StatelessWidget {
                           controller: model.controller,
                           inputFormatters: [model.maskTextInputFormatter],
                           keyboardType: TextInputType.number,
-                          decoration: InputDecoration(border: InputBorder.none),
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: '+1 XXX-XXX-XXXX', hintStyle: stylingInputHintText
+                          ),
                         ),
                       ),
                     ),

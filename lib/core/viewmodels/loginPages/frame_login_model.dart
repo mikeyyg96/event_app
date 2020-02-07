@@ -14,15 +14,18 @@ class FrameLoginModel extends BaseModel {
   final databaseReference = Firestore.instance;
   String _smsCode = '';
   String _verificationID = '';
+  int _forceResend;
 
   TextEditingController _controller = new TextEditingController();
   MaskTextInputFormatter _maskTextInputFormatter = new MaskTextInputFormatter(mask: '+# ###-###-####', filter: { "#": RegExp(r'[0-9]') });
+  String _errorText = null;
 
   String _image = 'assets/background/town_background.jpg';
 
   bool _pressed = false;
   bool _isTransitioned = false;
 
+  String get errorText => _errorText;
   TextEditingController get controller => _controller;
   MaskTextInputFormatter get maskTextInputFormatter => _maskTextInputFormatter;
 
@@ -38,10 +41,18 @@ class FrameLoginModel extends BaseModel {
     };
 
     final PhoneVerificationCompleted verificationCompleted = (AuthCredential credential) {
-      print('Verified');
-      smsCodeDialog(context);
+      print('Verified: ${credential.providerId}');
+      FirebaseAuth.instance.currentUser().then((userID) {
+        if (userID != null) {
+          print(userID.phoneNumber);
+          animateDown();
+        } else {
+          smsCodeDialog(context);
+        }
+      });
     };
     final PhoneCodeSent smsCodeSent=(String verID,[int forceCodeResend]){
+      _forceResend = forceCodeResend;
       _verificationID = verID;
     };
 
@@ -55,8 +66,8 @@ class FrameLoginModel extends BaseModel {
       codeSent: smsCodeSent,
       timeout: const Duration(seconds: 5),
       verificationCompleted: verificationCompleted,
-      verificationFailed: verificationFailed
-
+      verificationFailed: verificationFailed,
+      forceResendingToken: _forceResend
     );    
   }
 
@@ -65,8 +76,16 @@ class FrameLoginModel extends BaseModel {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) => AlertDialog(
-        title: Text('Enter SMS Code', style: stylingActiveCard,),
+        title: Center(child: Text('Enter SMS Code', style: stylingActiveCard,)),
         content: TextField(
+          style: stylingActiveCardNum,
+          keyboardType: TextInputType.number,
+          textAlign: TextAlign.center,
+          decoration: InputDecoration(
+            border: InputBorder.none
+          ),
+          autofocus: true,
+
           onChanged: (value) {
             _smsCode = value;
           },
@@ -82,10 +101,25 @@ class FrameLoginModel extends BaseModel {
                   Navigator.pop(context);
                   signIn();
                 }
-              });
+              },);
             },
-            child: Text('Submit'),
-          )
+            child: Text('Cancel', style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),),
+          ),
+          FlatButton(
+            onPressed: () {
+              FirebaseAuth.instance.currentUser().then((userID) {
+                if (userID != null) {
+                  Navigator.pop(context);
+                  animateDown();
+                } else {
+                  Navigator.pop(context);
+                  signIn();
+                }
+              },);
+            },
+            child: Text('Submit', style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold),),
+          ),
+          
         ],
       )
     );
@@ -98,7 +132,11 @@ class FrameLoginModel extends BaseModel {
     );
     await FirebaseAuth.instance.signInWithCredential(credential).then((user){
       animateDown();
-    }).catchError((e)=>print(e));
+    }).catchError((e) {
+      print(e);
+      _errorText = 'Incorrect SMS code. Try again.';
+      _controller.clear();
+    });
   }
 
   void animateDown() {
@@ -139,7 +177,7 @@ class FrameLoginModel extends BaseModel {
       snapshot.documents.forEach((f) {
         databaseEvents.add(new Event(
           category: f.data['category'],
-          date: f.data['date'].toString(),
+          date: f.data['date'],
           description: f.data['description'],
           distance: f.data['distance'],
           image: 'https://picsum.photos/seed/picsum/200/300',

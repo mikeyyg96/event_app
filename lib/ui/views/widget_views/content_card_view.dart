@@ -157,7 +157,7 @@ class ContentCardView extends StatelessWidget {
                             width: 275,
                             child: GestureDetector(
                               onTap: () => Navigator.of(context)
-                                  .push(model.eventDetailsRoute(event)),
+                                  .push(model.eventDetailsRoute(event[index])),
                               child: Text(
                                 'Read More',
                                 style: onSearch
@@ -340,7 +340,7 @@ class ContentCardView extends StatelessWidget {
                                 width: 275,
                                 child: GestureDetector(
                                   onTap: () => Navigator.of(context)
-                                      .push(model.eventDetailsRoute(event)),
+                                      .push(model.eventDetailsRoute(event[index])),
                                   child: Text(
                                     'Read More',
                                     style: onSearch
