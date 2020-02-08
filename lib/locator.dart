@@ -1,6 +1,5 @@
 import 'package:event_app/core/viewmodels/contentPages/event_details_model.dart';
 import 'package:event_app/core/viewmodels/contentPages/profile/profile_model.dart';
-import 'package:event_app/core/viewmodels/widget_models/content_category_model.dart';
 import 'package:event_app/core/viewmodels/widget_models/organization_card_model.dart';
 import 'package:get_it/get_it.dart';
 
@@ -16,7 +15,6 @@ void setupLocator() {
 
   locator.registerFactory(() => SearchModel());
   locator.registerFactory(() => ContentCardModel());
-  locator.registerFactory(() => ContentCategoryModel());
   locator.registerFactory(() => EventDetailsModel());
   locator.registerFactory(() => PreferencesModel());
   locator.registerFactory(() => OrganizationCardModel());
