@@ -37,7 +37,14 @@ class FrameLoginModel extends BaseModel {
   Future<void> verifyNumber(BuildContext context) async {
     final PhoneCodeAutoRetrievalTimeout autoRetrievalTimeout = (String verificationID) {
       _verificationID = verificationID;
-      smsCodeDialog(context);
+      FirebaseAuth.instance.currentUser().then((userID) {
+        if (userID != null) {
+          print('user signed in: $userID');
+          animateDown();
+        } else {
+          smsCodeDialog(context);
+        }
+      });
     };
 
     final PhoneVerificationCompleted verificationCompleted = (AuthCredential credential) {
@@ -64,7 +71,7 @@ class FrameLoginModel extends BaseModel {
       phoneNumber: '+' + _maskTextInputFormatter.getUnmaskedText(),
       codeAutoRetrievalTimeout: autoRetrievalTimeout,
       codeSent: smsCodeSent,
-      timeout: const Duration(seconds: 5),
+      timeout: const Duration(seconds: 0),
       verificationCompleted: verificationCompleted,
       verificationFailed: verificationFailed,
       forceResendingToken: _forceResend
