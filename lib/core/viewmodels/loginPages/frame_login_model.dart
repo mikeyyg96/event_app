@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:event_app/core/classes/event.dart';
+import 'package:event_app/core/classes/user.dart';
 import 'package:event_app/core/data/placeholders.dart';
 import 'package:event_app/core/enums/viewstate.dart';
 import 'package:event_app/core/viewmodels/base_model.dart';
@@ -11,16 +12,22 @@ import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class FrameLoginModel extends BaseModel {
+  FirebaseUser _firebaseUser;
+  User _user;
   final databaseReference = Firestore.instance;
   String _smsCode = '';
   String _verificationID = '';
   int _forceResend;
 
   TextEditingController _controller = new TextEditingController();
-  MaskTextInputFormatter _maskTextInputFormatter = new MaskTextInputFormatter(mask: '+# ###-###-####', filter: { "#": RegExp(r'[0-9]') });
+  MaskTextInputFormatter _maskTextInputFormatter = new MaskTextInputFormatter(
+      mask: '+# ###-###-####', filter: {"#": RegExp(r'[0-9]')});
   String _errorText = null;
 
   String _image = 'assets/background/town_background.jpg';
+
+  FirebaseUser get firebaseUser => _firebaseUser;
+  User get user => _user;
 
   bool _pressed = false;
   bool _isTransitioned = false;
@@ -35,10 +42,12 @@ class FrameLoginModel extends BaseModel {
   bool get isTransitioned => _isTransitioned;
 
   Future<void> verifyNumber(BuildContext context) async {
-    final PhoneCodeAutoRetrievalTimeout autoRetrievalTimeout = (String verificationID) {
+    final PhoneCodeAutoRetrievalTimeout autoRetrievalTimeout =
+        (String verificationID) {
       _verificationID = verificationID;
       FirebaseAuth.instance.currentUser().then((userID) {
         if (userID != null) {
+          _firebaseUser = userID;
           print('user signed in: $userID');
           animateDown();
         } else {
@@ -47,10 +56,12 @@ class FrameLoginModel extends BaseModel {
       });
     };
 
-    final PhoneVerificationCompleted verificationCompleted = (AuthCredential credential) {
+    final PhoneVerificationCompleted verificationCompleted =
+        (AuthCredential credential) {
       print('Verified: ${credential.providerId}');
       FirebaseAuth.instance.currentUser().then((userID) {
         if (userID != null) {
+          _firebaseUser = userID;
           print(userID.phoneNumber);
           animateDown();
         } else {
@@ -58,86 +69,98 @@ class FrameLoginModel extends BaseModel {
         }
       });
     };
-    final PhoneCodeSent smsCodeSent=(String verID,[int forceCodeResend]){
+    final PhoneCodeSent smsCodeSent = (String verID, [int forceCodeResend]) {
       _forceResend = forceCodeResend;
       _verificationID = verID;
     };
 
-    final PhoneVerificationFailed verificationFailed = (AuthException exception) {
+    final PhoneVerificationFailed verificationFailed =
+        (AuthException exception) {
       print('${exception.message}');
     };
 
     await FirebaseAuth.instance.verifyPhoneNumber(
-      phoneNumber: '+' + _maskTextInputFormatter.getUnmaskedText(),
-      codeAutoRetrievalTimeout: autoRetrievalTimeout,
-      codeSent: smsCodeSent,
-      timeout: const Duration(seconds: 0),
-      verificationCompleted: verificationCompleted,
-      verificationFailed: verificationFailed,
-      forceResendingToken: _forceResend
-    );    
+        phoneNumber: '+' + _maskTextInputFormatter.getUnmaskedText(),
+        codeAutoRetrievalTimeout: autoRetrievalTimeout,
+        codeSent: smsCodeSent,
+        timeout: const Duration(seconds: 0),
+        verificationCompleted: verificationCompleted,
+        verificationFailed: verificationFailed,
+        forceResendingToken: _forceResend);
   }
 
   Future<bool> smsCodeDialog(BuildContext context) {
     return showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) => AlertDialog(
-        title: Center(child: Text('Enter SMS Code', style: stylingActiveCard,)),
-        content: TextField(
-          style: stylingActiveCard,
-          keyboardType: TextInputType.number,
-          textAlign: TextAlign.center,
-          decoration: InputDecoration(
-            border: InputBorder.none
-          ),
-          autofocus: true,
-
-          onChanged: (value) {
-            _smsCode = value;
-          },
-        ),
-        actions: <Widget>[
-          FlatButton(
-            onPressed: () {
-              FirebaseAuth.instance.currentUser().then((userID) {
-                if (userID != null) {
-                  Navigator.pop(context);
-                  animateDown();
-                } else {
-                  Navigator.pop(context);
-                  signIn();
-                }
-              },);
-            },
-            child: Text('Cancel', style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),),
-          ),
-          FlatButton(
-            onPressed: () {
-              FirebaseAuth.instance.currentUser().then((userID) {
-                if (userID != null) {
-                  Navigator.pop(context);
-                  animateDown();
-                } else {
-                  Navigator.pop(context);
-                  signIn();
-                }
-              },);
-            },
-            child: Text('Submit', style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold),),
-          ),
-          
-        ],
-      )
-    );
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) => AlertDialog(
+              title: Center(
+                  child: Text(
+                'Enter SMS Code',
+                style: stylingActiveCard,
+              )),
+              content: TextField(
+                style: stylingActiveCard,
+                keyboardType: TextInputType.number,
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(border: InputBorder.none),
+                autofocus: true,
+                onChanged: (value) {
+                  _smsCode = value;
+                },
+              ),
+              actions: <Widget>[
+                FlatButton(
+                  onPressed: () {
+                    FirebaseAuth.instance.currentUser().then(
+                      (userID) {
+                        if (userID != null) {
+                          Navigator.pop(context);
+                          animateDown();
+                        } else {
+                          Navigator.pop(context);
+                          signIn();
+                        }
+                      },
+                    );
+                  },
+                  child: Text(
+                    'Cancel',
+                    style: TextStyle(
+                        color: Colors.grey, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                FlatButton(
+                  onPressed: () {
+                    FirebaseAuth.instance.currentUser().then(
+                      (userID) {
+                        if (userID != null) {
+                          Navigator.pop(context);
+                          animateDown();
+                        } else {
+                          Navigator.pop(context);
+                          signIn();
+                        }
+                      },
+                    );
+                  },
+                  child: Text(
+                    'Submit',
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ));
   }
 
   signIn() async {
-    final AuthCredential credential= PhoneAuthProvider.getCredential(
+    final AuthCredential credential = PhoneAuthProvider.getCredential(
       verificationId: _verificationID,
       smsCode: _smsCode,
     );
-    await FirebaseAuth.instance.signInWithCredential(credential).then((user){
+    await FirebaseAuth.instance.signInWithCredential(credential).then((user) {
       animateDown();
     }).catchError((e) {
       print(e);
@@ -174,7 +197,9 @@ class FrameLoginModel extends BaseModel {
     setState(ViewState.Idle);
   }
 
-  Future<List<Event>> getEvents() async {
+  Future<List<Event>> getEvents(FirebaseUser user) async {
+    await getUser(user.uid);
+
     databaseEvents.clear();
     // Eventually a parameter would be the preferences to filter
     await databaseReference
@@ -195,6 +220,54 @@ class FrameLoginModel extends BaseModel {
       });
     });
     return databaseEvents;
+  }
+
+  Future<User> getUser(String user) async {
+    await databaseReference
+        .collection('users')
+        .document(user)
+        .get()
+        .then((datasnapshot) async {
+      if (datasnapshot.exists) {
+        print(datasnapshot.data['email'].toString());
+        _user = new User(
+          name: datasnapshot.data['name'],
+          type: datasnapshot.data['type'],
+          participated: datasnapshot.data['participated'],
+          hosted: datasnapshot.data['hosted'],
+          reserved: datasnapshot.data['reserved'],
+          interested: datasnapshot.data['interested'],
+          past: datasnapshot.data['past'],
+        );
+      } else {
+        await databaseReference.collection('users').document(user).setData({
+          'name': 'Michael Gallego',
+          'type': 'Member',
+          'participated': '0',
+          'hosted': '0',
+          'rewardPoints': '0',
+          'reserved': [],
+          'interested': [],
+          'past': []
+        });
+
+        await databaseReference
+            .collection('users')
+            .document(user)
+            .get()
+            .then((datasnapshot) {
+          _user = new User(
+            name: datasnapshot.data['name'],
+            type: datasnapshot.data['type'],
+            participated: datasnapshot.data['participated'],
+            hosted: datasnapshot.data['hosted'],
+            reserved: datasnapshot.data['reserved'],
+            interested: datasnapshot.data['interested'],
+            past: datasnapshot.data['past'],
+          );
+        });
+      }
+    });
   }
 
   //* Route transition functions

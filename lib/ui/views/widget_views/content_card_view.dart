@@ -5,6 +5,7 @@ import 'package:event_app/ui/shared/styling.dart';
 import 'package:flutter/material.dart';
 
 import 'package:event_app/core/data/placeholders.dart';
+import 'package:cache_image/cache_image.dart';
 
 import '../base_view.dart';
 
@@ -41,10 +42,11 @@ class ContentCardView extends StatelessWidget {
                             width: 275,
                             child: Stack(
                               children: <Widget>[
-                                Image.network(
-                                  event[index].image,
-                                  fit: BoxFit.fill,
+                                FadeInImage(
+                                  placeholder: AssetImage('assets/background/placeholder.png'),
+                                  fit: BoxFit.cover,
                                   width: double.infinity,
+                                  image: CacheImage(event[index].image),
                                 ),
                                 Container(
                                   alignment: Alignment.bottomCenter,
@@ -84,7 +86,7 @@ class ContentCardView extends StatelessWidget {
                                                   Radius.circular(30.0)),
                                             ),
                                             child: Text(
-                                              '\%${event[index].price}',
+                                              '\$${event[index].price}',
                                               style: stylingInactiveCardNum,
                                             ),
                                           ),
@@ -114,8 +116,7 @@ class ContentCardView extends StatelessWidget {
                               ],
                             ),
                           ),
-                          Text(
-                              event[index].name,
+                          Text(event[index].name,
                               style: onSearch
                                   ? stylingActiveCard
                                   : stylingInactiveCard),
@@ -193,12 +194,13 @@ class ContentCardView extends StatelessWidget {
                                 width: 275,
                                 child: Stack(
                                   children: <Widget>[
-                                    Image.network(
-                                      filteredEvents.isEmpty
-                                          ? databaseEvents[index].image
-                                          : filteredEvents[index].image,
-                                      fit: BoxFit.fill,
+                                    FadeInImage(
+                                      placeholder: AssetImage('assets/background/placeholder.png'),
+                                      fit: BoxFit.cover,
                                       width: double.infinity,
+                                      image: CacheImage(filteredEvents.isEmpty
+                                          ? databaseEvents[index].image
+                                          : filteredEvents[index].image),
                                     ),
                                     Container(
                                       alignment: Alignment.bottomCenter,
@@ -331,8 +333,8 @@ class ContentCardView extends StatelessWidget {
                                 padding: const EdgeInsets.all(8.0),
                                 width: 275,
                                 child: GestureDetector(
-                                  onTap: () => Navigator.of(context)
-                                      .push(model.eventDetailsRoute(event[index])),
+                                  onTap: () => Navigator.of(context).push(
+                                      model.eventDetailsRoute(event[index])),
                                   child: Text(
                                     'Read More',
                                     style: onSearch

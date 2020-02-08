@@ -179,7 +179,7 @@ class ProfileView extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Text(
-                    'Upcoming Events',
+                    'Reserved Events',
                     style: stylingActiveCardNum,
                   ),
                 ),
@@ -306,6 +306,7 @@ class ProfileView extends StatelessWidget {
                           child: Container(
                               child: Center(
                         child: CircleAvatar(
+                          backgroundColor: Colors.black54,
                           backgroundImage:
                               AssetImage('assets/people/person_1.jpg'),
                           radius: 100,
