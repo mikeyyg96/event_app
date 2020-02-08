@@ -42,9 +42,10 @@ class ContentCardView extends StatelessWidget {
                             child: Stack(
                               children: <Widget>[
                                 Image.network(
-                                  filteredEvents.isEmpty
-                                      ? databaseEvents[index].image
-                                      : filteredEvents[index].image,
+                                  event[index].image,
+                                  // filteredEvents.isEmpty
+                                  //     ? databaseEvents[index].image
+                                  //     : filteredEvents[index].image,
                                   fit: BoxFit.fill,
                                   width: double.infinity,
                                 ),
