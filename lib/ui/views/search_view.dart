@@ -1,5 +1,3 @@
-import 'package:event_app/core/classes/event.dart';
-import 'package:event_app/core/data/events.dart';
 import 'package:event_app/core/data/placeholders.dart';
 import 'package:event_app/core/viewmodels/search_model.dart';
 import 'package:event_app/ui/views/base_view.dart';
@@ -8,9 +6,6 @@ import 'package:event_app/ui/shared/styling.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 
 import 'widget_views/content_card_view.dart';
-
-// Data
-import 'package:event_app/core/data/events.dart';
 
 class SearchView extends StatelessWidget {
   @override
@@ -43,7 +38,7 @@ class SearchView extends StatelessWidget {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () => print('Tapped Avatar'),
+                        onTap: () => Navigator.of(context).push(model.accountRoute()),
                         child: CircleAvatar(
                           backgroundColor: Colors.black,
                           radius: 24.0,
