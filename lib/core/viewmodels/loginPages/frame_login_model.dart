@@ -78,7 +78,7 @@ class FrameLoginModel extends BaseModel {
       builder: (BuildContext context) => AlertDialog(
         title: Center(child: Text('Enter SMS Code', style: stylingActiveCard,)),
         content: TextField(
-          style: stylingActiveCardNum,
+          style: stylingActiveCard,
           keyboardType: TextInputType.number,
           textAlign: TextAlign.center,
           decoration: InputDecoration(
