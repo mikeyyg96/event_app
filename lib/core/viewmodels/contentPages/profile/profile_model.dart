@@ -1,9 +1,10 @@
-import 'package:event_app/core/classes/event.dart';
 import 'package:event_app/core/enums/viewstate.dart';
 import 'package:event_app/core/viewmodels/base_model.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:event_app/core/classes/earnings.dart';
+import 'package:event_app/core/classes/event.dart';
 import 'package:event_app/ui/views/contentPages/event_details_view.dart';
+
 import 'package:flutter/material.dart';
 
 class ProfileModel extends BaseModel {
@@ -43,7 +44,6 @@ class ProfileModel extends BaseModel {
 
     setState(ViewState.Idle);
   }
-
   Route eventDetailsRoute(Event event) {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) =>
