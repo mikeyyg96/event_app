@@ -1,8 +1,9 @@
+
+import 'package:event_app/core/classes/event.dart';
 import 'package:event_app/core/enums/viewstate.dart';
 import 'package:event_app/core/viewmodels/base_model.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:event_app/core/classes/earnings.dart';
-import 'package:event_app/core/classes/event.dart';
 import 'package:event_app/ui/views/contentPages/event_details_view.dart';
 
 import 'package:flutter/material.dart';

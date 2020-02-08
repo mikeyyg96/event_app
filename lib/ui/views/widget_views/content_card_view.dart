@@ -43,9 +43,6 @@ class ContentCardView extends StatelessWidget {
                               children: <Widget>[
                                 Image.network(
                                   event[index].image,
-                                  // filteredEvents.isEmpty
-                                  //     ? databaseEvents[index].image
-                                  //     : filteredEvents[index].image,
                                   fit: BoxFit.fill,
                                   width: double.infinity,
                                 ),
@@ -105,11 +102,7 @@ class ContentCardView extends StatelessWidget {
                                                   Radius.circular(30.0)),
                                             ),
                                             child: Text(
-                                              filteredEvents.isEmpty
-                                                  ? databaseEvents[index]
-                                                      .category
-                                                  : filteredEvents[index]
-                                                      .category,
+                                              event[index].category,
                                               style: stylingInactiveCardNum,
                                             ),
                                           ),
@@ -122,14 +115,12 @@ class ContentCardView extends StatelessWidget {
                             ),
                           ),
                           Text(
-                              filteredEvents.isEmpty
-                                  ? databaseEvents[index].name
-                                  : filteredEvents[index].name,
+                              event[index].name,
                               style: onSearch
                                   ? stylingActiveCard
                                   : stylingInactiveCard),
                           Text(
-                            ' - ${event[index].organization} -',
+                            ' - ${event[index].category} -',
                             style: onSearch
                                 ? stylingActiveCardNumItalics
                                 : stylingInactiveCardNumItalics,

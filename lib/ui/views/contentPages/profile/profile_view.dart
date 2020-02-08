@@ -1,11 +1,9 @@
-
 import 'package:event_app/core/classes/event.dart';
 import 'package:event_app/core/data/placeholders.dart';
 import 'package:event_app/core/viewmodels/contentPages/profile/profile_model.dart';
 import 'package:event_app/ui/shared/styling.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
-
 import 'package:shimmer/shimmer.dart';
 import 'package:event_app/core/classes/earnings.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
@@ -295,7 +293,6 @@ class ProfileView extends StatelessWidget {
                 .toList(),
           ),
         ];
-
         return SingleChildScrollView(
           child: Container(
             child: Column(
@@ -452,4 +449,3 @@ class EarningChart extends StatelessWidget {
     );
   }
 }
-
