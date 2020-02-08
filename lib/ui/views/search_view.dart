@@ -178,9 +178,7 @@ class SearchView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           ContentCardView(
-            event: filteredEventsFromSearch.isNotEmpty
-                ? filteredEventsFromSearch
-                : databaseEvents,
+            event: filteredEventsFromSearch,
             onSearch: true,
           ),
           Container(
