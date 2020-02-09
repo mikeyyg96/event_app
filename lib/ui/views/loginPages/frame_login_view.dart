@@ -22,7 +22,7 @@ class FrameLoginView extends StatelessWidget {
     return BaseView<FrameLoginModel>(
       builder: (context, model, child) => model.isTransitioned
           ? FutureBuilder<List<Event>>(
-              future: model.getEvents(),
+              future: model.getEvents(model.firebaseUser),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   return Stack(
