@@ -26,8 +26,14 @@ final stylingLocationText = const TextStyle(color: Color(0xFFAF9164), fontSize: 
 
 final stylingLargeButton = const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0);
 
+final stylingFormLabel = const TextStyle(color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 16.0);
+
+final stylingFormInput = const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0);
+
 //*Dividers
 
 final stylingGreyDivider = Divider(color: Colors.grey[200], indent: 24.0, endIndent: 24.0, thickness: 1.0);
 
 final stylingListDivider = Divider(color: Colors.grey[200], indent: 0.0, endIndent: 0.0, thickness: 1.0);
+
+final stylingFormDivider = Divider(color: Colors.black, indent: 0.0, endIndent: 0.0, thickness: 1.0);

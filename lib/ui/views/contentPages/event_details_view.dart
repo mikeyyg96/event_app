@@ -21,7 +21,7 @@ class EventDetailsView extends StatelessWidget {
         body: Column(
           children: <Widget>[
             Container(
-              height: 300,
+              height: MediaQuery.of(context).size.height / 3,
               child: Stack(
                 children: <Widget>[
                   Image.network(
@@ -102,6 +102,19 @@ class EventDetailsView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                event.name,
+                                style: stylingHeader,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Text(
                             'Event Info',
@@ -112,7 +125,6 @@ class EventDetailsView extends StatelessWidget {
                             ),
                           ),
                         ),
-                        stylingListDivider,
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: Row(
@@ -141,7 +153,9 @@ class EventDetailsView extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Text('Date'),
-                              Text(DateTime.fromMicrosecondsSinceEpoch(event.date.microsecondsSinceEpoch).toString()),
+                              Text(DateTime.fromMicrosecondsSinceEpoch(
+                                      event.date.microsecondsSinceEpoch)
+                                  .toString()),
                             ],
                           ),
                         ),
@@ -167,7 +181,6 @@ class EventDetailsView extends StatelessWidget {
                             ],
                           ),
                         ),
-                        stylingListDivider,
                         Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Text(
@@ -185,7 +198,8 @@ class EventDetailsView extends StatelessWidget {
                         Container(
                           height: 400,
                           width: double.infinity,
-                          padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 128.0),
+                          padding: const EdgeInsets.fromLTRB(
+                              16.0, 16.0, 16.0, 128.0),
                           child: GoogleMap(
                             gestureRecognizers:
                                 <Factory<OneSequenceGestureRecognizer>>[

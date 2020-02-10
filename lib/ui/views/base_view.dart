@@ -1,4 +1,5 @@
 import 'package:event_app/core/viewmodels/base_model.dart';
+import 'package:event_app/core/viewmodels/contentPages/createEventForm/create_event_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +15,7 @@ class BaseView<T extends BaseModel> extends StatefulWidget {
   _BaseViewState<T> createState() => _BaseViewState<T>();
 }
 
-class _BaseViewState<T extends BaseModel> extends State<BaseView<T>> {
+class _BaseViewState<T extends BaseModel> extends State<BaseView<T>> with AutomaticKeepAliveClientMixin {
   T model = locator<T>();
 
   @override
@@ -26,6 +27,7 @@ class _BaseViewState<T extends BaseModel> extends State<BaseView<T>> {
   }
 
   @override
+  bool get wantKeepAlive => true;
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<T>(
         create: (key) => model, 

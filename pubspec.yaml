@@ -4,11 +4,12 @@ description: A new Flutter project.
 version: 1.0.0+4
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
+  datetime_picker_formfield: ^1.0.0
 
   cupertino_icons: ^0.1.2
   get_it: ^3.1.0
@@ -26,14 +27,14 @@ dependencies:
   google_maps_flutter: ^0.5.22+1
   shimmer: ^1.0.1
   charts_flutter: ^0.8.1
+  flutter_google_places: ^0.2.3
+  geocoder: ^0.2.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-
 flutter:
-
   uses-material-design: true
 
   assets:
@@ -41,7 +42,6 @@ flutter:
     - assets/events/
     - assets/people/
     - assets/icon/
-
 
   fonts:
     - family: Geosans

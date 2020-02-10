@@ -1,4 +1,5 @@
 import 'package:event_app/core/viewmodels/contentPages/profile/profile_model.dart';
+import 'package:event_app/ui/views/contentPages/createEventForm/create_event_view.dart';
 import 'package:event_app/ui/shared/styling.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
@@ -227,9 +228,7 @@ class ProfileView extends StatelessWidget {
         );
         break;
       case 2:
-        return Container(
-          color: Theme.of(context).accentColor,
-        );
+        return CreateEventView();
         break;
       default:
         return Container(
