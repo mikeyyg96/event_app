@@ -14,7 +14,6 @@ GetIt locator = GetIt.instance;
 
 void setupLocator() {
   locator.registerFactory(() => FrameLoginModel());
-
   locator.registerFactory(() => SearchModel());
   locator.registerFactory(() => ContentCardModel());
   locator.registerFactory(() => EventDetailsModel());

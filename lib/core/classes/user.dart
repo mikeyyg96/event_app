@@ -1,4 +1,3 @@
-
 class User {
   final String name, type, participated, hosted, rewardPoints;
   final List<dynamic> reserved, interested, past;

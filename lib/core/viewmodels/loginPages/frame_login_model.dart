@@ -278,6 +278,54 @@ class FrameLoginModel extends BaseModel {
     
   }
 
+  Future<User> getUser(String user) async {
+    await databaseReference
+        .collection('users')
+        .document(user)
+        .get()
+        .then((datasnapshot) async {
+      if (datasnapshot.exists) {
+        print(datasnapshot.data['email'].toString());
+        _user = new User(
+          name: datasnapshot.data['name'],
+          type: datasnapshot.data['type'],
+          participated: datasnapshot.data['participated'],
+          hosted: datasnapshot.data['hosted'],
+          reserved: datasnapshot.data['reserved'],
+          interested: datasnapshot.data['interested'],
+          past: datasnapshot.data['past'],
+        );
+      } else {
+        await databaseReference.collection('users').document(user).setData({
+          'name': 'Michael Gallego',
+          'type': 'Member',
+          'participated': '0',
+          'hosted': '0',
+          'rewardPoints': '0',
+          'reserved': [],
+          'interested': [],
+          'past': []
+        });
+
+        await databaseReference
+            .collection('users')
+            .document(user)
+            .get()
+            .then((datasnapshot) {
+          _user = new User(
+            name: datasnapshot.data['name'],
+            type: datasnapshot.data['type'],
+            participated: datasnapshot.data['participated'],
+            hosted: datasnapshot.data['hosted'],
+            reserved: datasnapshot.data['reserved'],
+            interested: datasnapshot.data['interested'],
+            past: datasnapshot.data['past'],
+          );
+        });
+      }
+    });
+  }
+
   //* Route transition functions
   Route searchRoute(Object view, Offset offset) {
     return PageRouteBuilder(
