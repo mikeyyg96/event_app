@@ -29,7 +29,8 @@ dependencies:
   charts_flutter: ^0.8.1
   flutter_google_places: ^0.2.3
   geocoder: ^0.2.1
-
+  cache_image: ^1.0.5
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
