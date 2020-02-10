@@ -5,10 +5,13 @@ import 'package:event_app/core/viewmodels/base_model.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:event_app/core/classes/earnings.dart';
 import 'package:event_app/ui/views/contentPages/event_details_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 
 class ProfileModel extends BaseModel {
+  
+  FirebaseUser _firebaseUser;
 
   List<Earnings> data = [
     Earnings(
@@ -36,6 +39,11 @@ class ProfileModel extends BaseModel {
   int _currentIndex = 1;
 
   int get currentIndex => _currentIndex;
+
+  Future<void> signOut() async {
+    _firebaseUser = await FirebaseAuth.instance.currentUser();
+    await FirebaseAuth.instance.signOut();
+  }
 
   void switchPage(int index) {
     setState(ViewState.Busy);

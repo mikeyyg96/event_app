@@ -3,6 +3,7 @@ import 'package:event_app/core/data/placeholders.dart';
 import 'package:event_app/core/viewmodels/contentPages/profile/profile_model.dart';
 import 'package:event_app/ui/views/contentPages/createEventForm/create_event_view.dart';
 import 'package:event_app/ui/shared/styling.dart';
+import 'package:event_app/ui/views/loginPages/frame_login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 import 'package:shimmer/shimmer.dart';
@@ -33,9 +34,17 @@ class ProfileView extends StatelessWidget {
           ),
           actions: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(right: 16.0),
-              child: Icon(Icons.settings),
-            ),
+                padding: const EdgeInsets.only(right: 16.0),
+                child: IconButton(
+                  onPressed: () async {
+                    await model.signOut();
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                            builder: (context) => FrameLoginView()),
+                        (Route<dynamic> route) => false);
+                  },
+                  icon: Icon(Icons.settings),
+                )),
           ],
         ),
         body: _page(model.currentIndex, context, model),
@@ -160,18 +169,29 @@ class ProfileView extends StatelessWidget {
         final List<ExpansionTile> _listofExpansions = [
           ExpansionTile(
             initiallyExpanded: true,
-            leading: RotatedBox(
+            leading: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                RotatedBox(
+                  quarterTurns: 1,
+                  child: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 12,
+                  ),
+                ),
+              ],
+            ),
+            trailing: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                RotatedBox(
                 quarterTurns: 1,
                 child: Icon(
                   Icons.arrow_forward_ios,
                   size: 12,
-                )),
-            trailing: RotatedBox(
-                quarterTurns: 1,
-                child: Icon(
-                  Icons.arrow_forward_ios,
-                  size: 12,
-                )),
+                ),),
+              ],
+            ),
             title: Row(
               children: <Widget>[
                 Expanded(
@@ -194,7 +214,10 @@ class ProfileView extends StatelessWidget {
                   (data) => ListTile(
                     onTap: () => Navigator.of(context)
                         .push(model.eventDetailsRoute(data)),
-                    leading: Icon(Icons.event, color: Colors.green,),
+                    leading: Icon(
+                      Icons.event,
+                      color: Colors.green,
+                    ),
                     title: Text(data.name),
                     subtitle: Text(DateTime.fromMicrosecondsSinceEpoch(
                             data.date.microsecondsSinceEpoch)

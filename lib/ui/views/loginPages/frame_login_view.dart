@@ -17,12 +17,15 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:event_app/core/data/categories.dart';
 
 class FrameLoginView extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
+
     return BaseView<FrameLoginModel>(
       builder: (context, model, child) => model.isTransitioned
           ? FutureBuilder<List<Event>>(
-              future: model.getEvents(model.firebaseUser),
+              future: model.getEvents(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   return Stack(
@@ -156,7 +159,9 @@ class FrameLoginView extends StatelessWidget {
                 AnimatedPositioned(
                   curve: Curves.easeIn,
                   duration: Duration(milliseconds: 500),
-                  onEnd: () => model.pressed ? model.transition() : {},
+                  onEnd: model.pressed ? () {
+                    model.transition();
+                  } : (){},
                   bottom: model.pressed
                       ? -300
                       : MediaQuery.of(context).size.height / 2.5,

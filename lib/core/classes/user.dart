@@ -1,4 +1,3 @@
-import 'package:event_app/core/classes/event.dart';
 
 class User {
   final String name, type, participated, hosted, rewardPoints;

@@ -9,6 +9,7 @@ import 'package:event_app/ui/shared/styling.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class FrameLoginModel extends BaseModel {
@@ -43,28 +44,30 @@ class FrameLoginModel extends BaseModel {
 
   Future<void> verifyNumber(BuildContext context) async {
     final PhoneCodeAutoRetrievalTimeout autoRetrievalTimeout =
-        (String verificationID) {
+        (String verificationID) async {
       _verificationID = verificationID;
-      FirebaseAuth.instance.currentUser().then((userID) {
+      await FirebaseAuth.instance.currentUser().then((userID) {
         if (userID != null) {
           _firebaseUser = userID;
-          print('user signed in: $userID');
+          print('user signed in: ${userID.uid}');
           animateDown();
         } else {
+          _firebaseUser = userID;
           smsCodeDialog(context);
         }
       });
     };
 
     final PhoneVerificationCompleted verificationCompleted =
-        (AuthCredential credential) {
+        (AuthCredential credential) async {
       print('Verified: ${credential.providerId}');
-      FirebaseAuth.instance.currentUser().then((userID) {
+      await FirebaseAuth.instance.currentUser().then((userID) {
         if (userID != null) {
           _firebaseUser = userID;
           print(userID.phoneNumber);
           animateDown();
         } else {
+          _firebaseUser = userID;
           smsCodeDialog(context);
         }
       });
@@ -111,8 +114,8 @@ class FrameLoginModel extends BaseModel {
               ),
               actions: <Widget>[
                 FlatButton(
-                  onPressed: () {
-                    FirebaseAuth.instance.currentUser().then(
+                  onPressed: () async{
+                    await FirebaseAuth.instance.currentUser().then(
                       (userID) {
                         if (userID != null) {
                           Navigator.pop(context);
@@ -131,8 +134,8 @@ class FrameLoginModel extends BaseModel {
                   ),
                 ),
                 FlatButton(
-                  onPressed: () {
-                    FirebaseAuth.instance.currentUser().then(
+                  onPressed: () async {
+                    await FirebaseAuth.instance.currentUser().then(
                       (userID) {
                         if (userID != null) {
                           Navigator.pop(context);
@@ -161,6 +164,7 @@ class FrameLoginModel extends BaseModel {
       smsCode: _smsCode,
     );
     await FirebaseAuth.instance.signInWithCredential(credential).then((user) {
+      _firebaseUser = user.user;
       animateDown();
     }).catchError((e) {
       print(e);
@@ -197,35 +201,37 @@ class FrameLoginModel extends BaseModel {
     setState(ViewState.Idle);
   }
 
-  Future<List<Event>> getEvents(FirebaseUser user) async {
-    await getUser(user.uid);
+  Future<List<Event>> getEvents() async {
+    await getUser();
 
     databaseEvents.clear();
     // Eventually a parameter would be the preferences to filter
-    await databaseReference
-        .collection("events")
-        .getDocuments()
-        .then((QuerySnapshot snapshot) {
-      snapshot.documents.forEach((f) {
-        databaseEvents.add(new Event(
-          category: f.data['category'],
-          date: f.data['date'],
-          description: f.data['description'],
-          distance: f.data['distance'],
-          image: 'https://picsum.photos/seed/picsum/200/300',
-          name: f.data['name'],
-          organization: f.data['organization'],
-          price: f.data['price'],
-        ));
+      await databaseReference
+          .collection("events")
+          .getDocuments()
+          .then((QuerySnapshot snapshot) {
+        snapshot.documents.forEach((f) {
+          databaseEvents.add(new Event(
+            category: f.data['category'],
+            date: f.data['date'],
+            description: f.data['description'],
+            distance: f.data['distance'],
+            image: 'https://picsum.photos/seed/picsum/200/300',
+            name: f.data['name'],
+            organization: f.data['organization'],
+            price: f.data['price'],
+          ));
+        });
       });
-    });
-    return databaseEvents;
+
+      return databaseEvents;
   }
 
-  Future<User> getUser(String user) async {
-    await databaseReference
+  Future<User> getUser() async {
+    await FirebaseAuth.instance.currentUser().then((userID) async{
+      await databaseReference
         .collection('users')
-        .document(user)
+        .document(userID.uid)
         .get()
         .then((datasnapshot) async {
       if (datasnapshot.exists) {
@@ -240,7 +246,7 @@ class FrameLoginModel extends BaseModel {
           past: datasnapshot.data['past'],
         );
       } else {
-        await databaseReference.collection('users').document(user).setData({
+        await databaseReference.collection('users').document(userID.uid).setData({
           'name': 'Michael Gallego',
           'type': 'Member',
           'participated': '0',
@@ -253,7 +259,7 @@ class FrameLoginModel extends BaseModel {
 
         await databaseReference
             .collection('users')
-            .document(user)
+            .document(userID.uid)
             .get()
             .then((datasnapshot) {
           _user = new User(
@@ -268,6 +274,8 @@ class FrameLoginModel extends BaseModel {
         });
       }
     });
+    });
+    
   }
 
   //* Route transition functions

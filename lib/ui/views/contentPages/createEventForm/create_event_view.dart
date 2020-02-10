@@ -1,4 +1,5 @@
 import 'package:event_app/core/viewmodels/contentPages/createEventForm/create_event_model.dart';
+import 'package:event_app/ui/shared/styling.dart';
 import 'package:flutter/material.dart';
 
 import '../../base_view.dart';
@@ -22,26 +23,27 @@ class CreateEventView extends StatelessWidget {
               Tab(
                 icon: Icon(Icons.info),
                 text: 'Info',
+                
               ),
               Tab(
                 icon: Icon(Icons.photo_camera),
                 text: 'Photos',
               ),
               Tab(
-                icon: Icon(Icons.security),
-                text: 'Security',
+                icon: Icon(Icons.attach_money),
+                text: 'Pricing',
               ),
               Tab(
-                icon: Icon(Icons.attach_money),
-                text: 'Price',
+                icon: Icon(Icons.security),
+                text: 'Agreement',
               ),
             ],
-            labelStyle: TextStyle(fontSize: 16.0),
-            labelColor: Colors.orange,
-            unselectedLabelColor: Colors.black,
+            labelStyle: TextStyle(fontSize: 14.0),
+            labelColor: Theme.of(context).primaryColor,
+            unselectedLabelColor: Colors.black38,
             indicatorSize: TabBarIndicatorSize.tab,
             indicatorPadding: EdgeInsets.all(5.0),
-            indicatorColor: Colors.orange,
+            indicatorColor: Theme.of(context).primaryColor,
           )),
           body: TabBarView(
             physics: model.isComplete ? null : NeverScrollableScrollPhysics(),
