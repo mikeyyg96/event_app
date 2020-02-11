@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   datetime_picker_formfield: ^1.0.0
+  image_picker: ^0.6.3+1
 
   cupertino_icons: ^0.1.2
   get_it: ^3.1.0
@@ -30,7 +31,7 @@ dependencies:
   flutter_google_places: ^0.2.3
   geocoder: ^0.2.1
   cache_image: ^1.0.5
-  
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

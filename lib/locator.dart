@@ -3,6 +3,7 @@ import 'package:event_app/core/viewmodels/contentPages/profile/profile_model.dar
 import 'package:event_app/core/viewmodels/widget_models/organization_card_model.dart';
 import 'package:event_app/core/viewmodels/contentPages/createEventForm/create_event_model.dart';
 import 'package:event_app/core/viewmodels/contentPages/createEventForm/info_model.dart';
+import 'package:event_app/core/viewmodels/contentPages/createEventForm/photos_model.dart';
 import 'package:get_it/get_it.dart';
 
 import 'core/viewmodels/contentPages/preferences_model.dart';
@@ -23,4 +24,5 @@ void setupLocator() {
   locator.registerFactory(() => ProfileModel());
   locator.registerFactory(() => CreateEventModel());
   locator.registerFactory(() => InfoModel());
+  locator.registerFactory(() => PhotosModel());
 }

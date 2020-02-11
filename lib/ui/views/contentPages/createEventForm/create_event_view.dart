@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 import '../../base_view.dart';
 import 'package:event_app/ui/views/contentPages/createEventForm/info_view.dart';
+import 'package:event_app/ui/views/contentPages/createEventForm/photos_view.dart';
+
 
 class CreateEventView extends StatelessWidget {
 
@@ -27,7 +29,7 @@ class CreateEventView extends StatelessWidget {
               ),
               Tab(
                 icon: Icon(Icons.photo_camera),
-                text: 'Photos',
+                text: 'Photo',
               ),
               Tab(
                 icon: Icon(Icons.attach_money),
@@ -46,12 +48,10 @@ class CreateEventView extends StatelessWidget {
             indicatorColor: Theme.of(context).primaryColor,
           )),
           body: TabBarView(
-            physics: model.isComplete ? null : NeverScrollableScrollPhysics(),
+            physics: model.containsPhoto ? null : NeverScrollableScrollPhysics(),
             children: <Widget>[
-              InfoView(onFormChange: model.checkFrom),
-              Container(
-                color: Colors.red,
-              ),
+              InfoView(onFormChange: model.checkForm),
+              PhotosView(onUpload: model.checkUpload),
               Container(
                 color: Colors.blue,
               ),
