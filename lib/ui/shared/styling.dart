@@ -30,6 +30,8 @@ final stylingFormLabel = const TextStyle(color: Colors.grey, fontWeight: FontWei
 
 final stylingFormInput = const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0);
 
+final stylingBoldButton = const TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold);
+
 //*Dividers
 
 final stylingGreyDivider = Divider(color: Colors.grey[200], indent: 24.0, endIndent: 24.0, thickness: 1.0);
