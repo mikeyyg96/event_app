@@ -1,7 +1,11 @@
 
 class User {
-  final String name, type, participated, hosted, rewardPoints;
-  final List<dynamic> reserved, interested, past;
+  String name, type, participated, hosted, rewardPoints;
+  List<dynamic> reserved, interested, past;
+
+  set setName(String name) {
+    this.name = name;
+  }
 
   User(
       {this.name,
@@ -9,4 +13,5 @@ class User {
       this.participated,
       this.hosted,
       this.rewardPoints, this.reserved, this.interested, this.past});
+
 }

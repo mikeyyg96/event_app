@@ -10,6 +10,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ProfileModel extends BaseModel {
+
+
+
+  TextEditingController _controller = new TextEditingController();
+  bool _editable = false;
   
   FirebaseUser _firebaseUser;
 
@@ -39,6 +44,29 @@ class ProfileModel extends BaseModel {
   int _currentIndex = 1;
 
   int get currentIndex => _currentIndex;
+
+  TextEditingController get controller => _controller;
+  bool get editable => _editable;
+
+  void editMode() {
+    setState(ViewState.Busy);
+
+
+    _editable = true;
+    notifyListeners();
+
+    setState(ViewState.Idle);
+  }
+
+  void viewMode() {
+    setState(ViewState.Busy);
+
+
+    _editable = false;
+    notifyListeners();
+
+    setState(ViewState.Idle);
+  }
 
   Future<void> signOut() async {
     _firebaseUser = await FirebaseAuth.instance.currentUser();

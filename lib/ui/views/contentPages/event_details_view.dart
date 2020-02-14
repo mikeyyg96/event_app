@@ -1,3 +1,4 @@
+import 'package:cache_image/cache_image.dart';
 import 'package:event_app/core/viewmodels/contentPages/event_details_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -24,8 +25,9 @@ class EventDetailsView extends StatelessWidget {
               height: MediaQuery.of(context).size.height / 3,
               child: Stack(
                 children: <Widget>[
-                  Image.network(
-                    event.image,
+                  FadeInImage(
+                    placeholder: AssetImage('assets/background/placeholder.png'),
+                    image: CacheImage('${event.image}'),
                     width: double.infinity,
                     fit: BoxFit.cover,
                   ),

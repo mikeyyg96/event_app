@@ -4,7 +4,6 @@ import 'package:event_app/core/classes/user.dart';
 import 'package:event_app/core/data/placeholders.dart';
 import 'package:event_app/core/enums/viewstate.dart';
 import 'package:event_app/core/viewmodels/base_model.dart';
-import 'package:event_app/core/viewmodels/widget_models/content_card_model.dart';
 import 'package:event_app/ui/shared/styling.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -42,6 +41,49 @@ class FrameLoginModel extends BaseModel {
   bool get pressed => _pressed;
   bool get isTransitioned => _isTransitioned;
 
+  Future<User> refreshUser(User user) async {
+    setState(ViewState.Busy);
+
+
+    await databaseReference
+        .collection('users')
+        .document(_firebaseUser.uid)
+        .updateData({
+      'hosted': user.hosted,
+      'interested': user.interested,
+      'past': user.past,
+      'name': user.name,
+      'reserved': user.reserved,
+      'type': user.type,
+      'rewardPoints': user.rewardPoints,
+      'participated': user.participated,
+    });
+
+    await databaseReference
+        .collection('users')
+        .document(_firebaseUser.uid)
+        .get()
+        .then((datasnapshot) {
+      _user = new User(
+        name: datasnapshot.data['name'],
+        type: datasnapshot.data['type'],
+        participated: datasnapshot.data['participated'],
+        hosted: datasnapshot.data['hosted'],
+        reserved: datasnapshot.data['reserved'],
+        interested: datasnapshot.data['interested'],
+        past: datasnapshot.data['past'],
+      );
+    });
+
+    
+
+    notifyListeners();
+
+    setState(ViewState.Idle);
+
+    return _user;
+  }
+
   Future<void> verifyNumber(BuildContext context) async {
     final PhoneCodeAutoRetrievalTimeout autoRetrievalTimeout =
         (String verificationID) async {
@@ -61,14 +103,20 @@ class FrameLoginModel extends BaseModel {
     final PhoneVerificationCompleted verificationCompleted =
         (AuthCredential credential) async {
       print('Verified: ${credential.providerId}');
-      await FirebaseAuth.instance.currentUser().then((userID) {
+      await FirebaseAuth.instance.currentUser().then((userID) async {
         if (userID != null) {
           _firebaseUser = userID;
           print(userID.phoneNumber);
           animateDown();
         } else {
-          _firebaseUser = userID;
-          smsCodeDialog(context);
+          await FirebaseAuth.instance
+              .signInWithCredential(credential)
+              .then((user) {
+            _firebaseUser = user.user;
+            animateDown();
+          });
+          // _firebaseUser = userID;
+          // smsCodeDialog(context);
         }
       });
     };
@@ -114,7 +162,7 @@ class FrameLoginModel extends BaseModel {
               ),
               actions: <Widget>[
                 FlatButton(
-                  onPressed: () async{
+                  onPressed: () async {
                     await FirebaseAuth.instance.currentUser().then(
                       (userID) {
                         if (userID != null) {
@@ -206,62 +254,36 @@ class FrameLoginModel extends BaseModel {
 
     databaseEvents.clear();
     // Eventually a parameter would be the preferences to filter
-      await databaseReference
-          .collection("events")
-          .getDocuments()
-          .then((QuerySnapshot snapshot) {
-        snapshot.documents.forEach((f) {
-          databaseEvents.add(new Event(
-            category: f.data['category'],
-            date: f.data['date'],
-            description: f.data['description'],
-            distance: f.data['distance'],
-            image: 'https://picsum.photos/seed/picsum/200/300',
-            name: f.data['name'],
-            organization: f.data['organization'],
-            price: f.data['price'],
-          ));
-        });
+    await databaseReference
+        .collection("events")
+        .getDocuments()
+        .then((QuerySnapshot snapshot) {
+      snapshot.documents.forEach((f) {
+        databaseEvents.add(new Event(
+          category: f.data['category'],
+          date: f.data['date'],
+          description: f.data['description'],
+          distance: f.data['distance'],
+          image: 'https://picsum.photos/seed/picsum/200/300',
+          name: f.data['name'],
+          organization: f.data['organization'],
+          price: f.data['price'],
+        ));
       });
+    });
 
-      return databaseEvents;
+    return databaseEvents;
   }
 
   Future<User> getUser() async {
-    await FirebaseAuth.instance.currentUser().then((userID) async{
+    await FirebaseAuth.instance.currentUser().then((userID) async {
       await databaseReference
-        .collection('users')
-        .document(userID.uid)
-        .get()
-        .then((datasnapshot) async {
-      if (datasnapshot.exists) {
-        print(datasnapshot.data['email'].toString());
-        _user = new User(
-          name: datasnapshot.data['name'],
-          type: datasnapshot.data['type'],
-          participated: datasnapshot.data['participated'],
-          hosted: datasnapshot.data['hosted'],
-          reserved: datasnapshot.data['reserved'],
-          interested: datasnapshot.data['interested'],
-          past: datasnapshot.data['past'],
-        );
-      } else {
-        await databaseReference.collection('users').document(userID.uid).setData({
-          'name': 'Michael Gallego',
-          'type': 'Member',
-          'participated': '0',
-          'hosted': '0',
-          'rewardPoints': '0',
-          'reserved': [],
-          'interested': [],
-          'past': []
-        });
-
-        await databaseReference
-            .collection('users')
-            .document(userID.uid)
-            .get()
-            .then((datasnapshot) {
+          .collection('users')
+          .document(userID.uid)
+          .get()
+          .then((datasnapshot) async {
+        if (datasnapshot.exists) {
+          print(datasnapshot.data['email'].toString());
           _user = new User(
             name: datasnapshot.data['name'],
             type: datasnapshot.data['type'],
@@ -271,11 +293,39 @@ class FrameLoginModel extends BaseModel {
             interested: datasnapshot.data['interested'],
             past: datasnapshot.data['past'],
           );
-        });
-      }
+        } else {
+          await databaseReference
+              .collection('users')
+              .document(userID.uid)
+              .setData({
+            'name': 'Michael Gallego',
+            'type': 'Member',
+            'participated': '0',
+            'hosted': '0',
+            'rewardPoints': '0',
+            'reserved': [],
+            'interested': [],
+            'past': []
+          });
+
+          await databaseReference
+              .collection('users')
+              .document(userID.uid)
+              .get()
+              .then((datasnapshot) {
+            _user = new User(
+              name: datasnapshot.data['name'],
+              type: datasnapshot.data['type'],
+              participated: datasnapshot.data['participated'],
+              hosted: datasnapshot.data['hosted'],
+              reserved: datasnapshot.data['reserved'],
+              interested: datasnapshot.data['interested'],
+              past: datasnapshot.data['past'],
+            );
+          });
+        }
+      });
     });
-    });
-    
   }
 
   //* Route transition functions

@@ -1,3 +1,4 @@
+import 'package:event_app/core/classes/user.dart';
 import 'package:event_app/core/data/placeholders.dart';
 import 'package:event_app/core/viewmodels/search_model.dart';
 import 'package:event_app/ui/views/base_view.dart';
@@ -7,7 +8,14 @@ import 'package:flutter_dash/flutter_dash.dart';
 
 import 'widget_views/content_card_view.dart';
 
+
 class SearchView extends StatelessWidget {
+
+  SearchView({this.user, this.updateUser});
+
+  final User user;
+  final Future<User> Function(User user) updateUser;
+
   @override
   Widget build(BuildContext context) {
     return BaseView<SearchModel>(
@@ -38,7 +46,7 @@ class SearchView extends StatelessWidget {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () => Navigator.of(context).push(model.accountRoute()),
+                        onTap: () => Navigator.of(context).push(model.accountRoute(user, updateUser)),
                         child: CircleAvatar(
                           backgroundColor: Colors.black,
                           radius: 24.0,
@@ -57,7 +65,7 @@ class SearchView extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Text('Hi, Mikey. \nWhat are you looking for?',
+                      Text('Hi, ${user.name} \nWhat are you looking for?',
                           style: stylingHeader),
                     ],
                   ),
@@ -78,7 +86,7 @@ class SearchView extends StatelessWidget {
                               color: Theme.of(context).primaryColor)),
                       Expanded(
                         child: Text(
-                          '501 Broadway, Nashville, TN 37203',
+                          'Current Address Coming Soon',
                           style: stylingLocationText,
                           textAlign: TextAlign.start,
                         ),
