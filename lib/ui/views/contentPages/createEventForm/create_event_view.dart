@@ -24,7 +24,7 @@ class CreateEventView extends StatelessWidget {
             },
             tabs: [
               Padding(
-                padding: const EdgeInsets.only(top: 6.0),
+                padding: const EdgeInsets.only(top: 0.0),
                 child: Tab(
                   child: Column(
                     children: <Widget>[
@@ -45,7 +45,7 @@ class CreateEventView extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 6.0),
+                padding: const EdgeInsets.only(top: 0.0),
                 child: Tab(
                   child: Column(
                     children: <Widget>[
@@ -66,7 +66,7 @@ class CreateEventView extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 6.0),
+                padding: const EdgeInsets.only(top: 0.0),
                 child: Tab(
                   child: Column(
                     children: <Widget>[
@@ -87,7 +87,7 @@ class CreateEventView extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 6.0),
+                padding: const EdgeInsets.only(top: 0.0),
                 child: Tab(
                   child: Column(
                     children: <Widget>[
