@@ -1,7 +1,6 @@
 import 'package:event_app/ui/views/loginPages/frame_login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:event_app/ui/views/contentPages/profile/profile_view.dart';
 
 import 'locator.dart';
 
@@ -27,8 +26,7 @@ class MyApp extends StatelessWidget {
         accentColor: Color(0xFFF7F3E3),
         fontFamily: 'Geosans'
       ),
-      // home: FrameLoginView(),
-      home: ProfileView(),
+      home: FrameLoginView(),
       debugShowCheckedModeBanner: false,
     );
   }
