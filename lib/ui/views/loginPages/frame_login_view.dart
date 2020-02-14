@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:event_app/core/classes/event.dart';
+import 'package:event_app/core/classes/user.dart';
 import 'package:event_app/core/data/placeholders.dart';
 import 'package:event_app/core/viewmodels/loginPages/frame_login_model.dart';
 import 'package:event_app/ui/shared/styling.dart';
@@ -72,7 +73,7 @@ class FrameLoginView extends StatelessWidget {
                                             onPressed: () =>
                                                 Navigator.of(context).push(
                                                     model.searchRoute(
-                                                        SearchView(),
+                                                        SearchView(user: model.user, updateUser: model.refreshUser),
                                                         Offset(-1.0, 0.0))),
                                             icon: Icon(Icons.search),
                                             color:
@@ -80,11 +81,11 @@ class FrameLoginView extends StatelessWidget {
                                             iconSize: 32,
                                           ),
                                           IconButton(
-                                            onPressed: () =>
-                                                Navigator.of(context).push(
-                                                    model.searchRoute(
-                                                        PreferencesView(),
-                                                        Offset(1.0, 0.0))),
+                                            onPressed: () {model.refreshUser(model.user);},
+                                                // Navigator.of(context).push(
+                                                //     model.searchRoute(
+                                                //         PreferencesView(),
+                                                //         Offset(1.0, 0.0))),
                                             icon: Icon(Icons.tune),
                                             color:
                                                 Colors.white.withOpacity(0.75),

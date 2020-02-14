@@ -1,11 +1,10 @@
-import 'package:event_app/core/classes/event.dart';
+import 'package:event_app/core/classes/user.dart';
 import 'package:event_app/core/data/placeholders.dart';
 import 'package:event_app/core/viewmodels/contentPages/profile/profile_model.dart';
 import 'package:event_app/ui/views/contentPages/createEventForm/create_event_view.dart';
 import 'package:event_app/ui/shared/styling.dart';
 import 'package:event_app/ui/views/loginPages/frame_login_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dash/flutter_dash.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:event_app/core/classes/earnings.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
@@ -13,6 +12,11 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import '../../base_view.dart';
 
 class ProfileView extends StatelessWidget {
+  ProfileView({this.user, this.updateUser});
+
+  final User user;
+  final Future<User> Function(User user) updateUser;
+
   @override
   Widget build(BuildContext context) {
     return BaseView<ProfileModel>(
@@ -185,11 +189,12 @@ class ProfileView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 RotatedBox(
-                quarterTurns: 1,
-                child: Icon(
-                  Icons.arrow_forward_ios,
-                  size: 12,
-                ),),
+                  quarterTurns: 1,
+                  child: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 12,
+                  ),
+                ),
               ],
             ),
             title: Row(
@@ -327,18 +332,52 @@ class ProfileView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Expanded(
-                          child: Container(
-                              child: Center(
-                        child: CircleAvatar(
-                          backgroundColor: Colors.black54,
-                          backgroundImage:
-                              AssetImage('assets/people/person_1.jpg'),
-                          radius: 100,
+                        child: Container(
+                          child: Center(
+                            child: CircleAvatar(
+                              backgroundColor: Colors.black54,
+                              backgroundImage:
+                                  AssetImage('assets/people/person_1.jpg'),
+                              radius: 100,
+                            ),
+                          ),
                         ),
-                      ))),
-                      Text(
-                        'Michael Gallego',
-                        style: stylingHeader,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                            width: 100,
+                            child: !model.editable
+                                ? Text(
+                                    user.name == '' ? '[Name Here]' : user.name,
+                                    style: stylingActiveCard)
+                                : TextField(
+                                    decoration: InputDecoration(
+                                        border: InputBorder.none),
+                                    controller: model.controller,
+                                    onChanged: (value) {
+                                      model.controller.selection =
+                                          TextSelection.collapsed(
+                                              offset:
+                                                  model.controller.text.length);
+                                    },
+                                    onEditingComplete: () {
+                                      user.name = model.controller.text;
+                                      updateUser(user);
+                                      model.viewMode();
+                                    },
+                                    style: stylingHeader,
+                                  ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: IconButton(
+                              onPressed: () => model.editMode(),
+                              icon: Icon(Icons.edit),
+                            ),
+                          ),
+                        ],
                       ),
                       Text(
                         '- Member -',
